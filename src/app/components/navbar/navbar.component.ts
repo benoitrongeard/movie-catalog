@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Signal } from '@angular/core';
+import { NavigationEnd, Router, Event, RouterEvent } from '@angular/router';
+import { filter, map } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +10,19 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   isMobileMenuOpen = false;
-  title = 'menu.films';
+  headerTitle$: Signal<string | undefined>;
+
+  constructor(private router: Router) {
+    this.headerTitle$ = toSignal(
+      this.router.events.pipe(
+        filter(
+          (e: Event | RouterEvent): e is RouterEvent =>
+            e instanceof NavigationEnd
+        ),
+        map((e: RouterEvent) => e?.url?.replaceAll('/', ''))
+      )
+    );
+  }
 
   toggleMenuMobile() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;

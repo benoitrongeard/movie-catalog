@@ -7,13 +7,20 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FilmsLayoutComponent } from './pages/films-layout/films-layout.component';
+import { SeriesLayoutComponent } from './pages/series-layout/series-layout.component';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    FilmsLayoutComponent,
+    SeriesLayoutComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
