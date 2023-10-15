@@ -9,6 +9,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FilmsLayoutComponent } from './pages/films-layout/films-layout.component';
 import { SeriesLayoutComponent } from './pages/series-layout/series-layout.component';
+import { FiltersComponent } from './pages/filters/filters.component';
+import { ComboboxComponent } from './components/combobox/combobox.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -20,19 +23,23 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
     NavbarComponent,
     FilmsLayoutComponent,
     SeriesLayoutComponent,
+    FiltersComponent,
+    ComboboxComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'en',
+      defaultLanguage: navigator.languages[0].substring(0, 2),
       loader: {
         provide: TranslateLoader,
         useFactory: TranslateHttpLoaderFactory,
         deps: [HttpClient],
       },
     }),
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

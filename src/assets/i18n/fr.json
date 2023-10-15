@@ -1,4 +1,8 @@
 {
+  "titles": {
+    "filters": "Filtres",
+    "search": "Rechercher"
+  },
   "menu": {
     "films": "Films",
     "series": "Series"

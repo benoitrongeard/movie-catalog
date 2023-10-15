@@ -2,6 +2,7 @@ import { Component, Signal } from '@angular/core';
 import { NavigationEnd, Router, Event, RouterEvent } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,10 @@ export class NavbarComponent {
   isMobileMenuOpen = false;
   headerTitle$: Signal<string | undefined>;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    public languageService: LanguageService
+  ) {
     this.headerTitle$ = toSignal(
       this.router.events.pipe(
         filter(

@@ -39,6 +39,22 @@
               </div>
             </div>
           </div>
+          <div class="hidden md:block float-right">
+            <div class="flex justify-around">
+              <button (click)="languageService.updateLanguage('en')">
+                <img
+                  class="h-8 w-8 mx-1"
+                  alt="United States"
+                  src="http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" />
+              </button>
+              <button (click)="languageService.updateLanguage('fr')">
+                <img
+                  class="h-8 w-8 mx-1"
+                  alt="France"
+                  src="http://purecatamphetamine.github.io/country-flag-icons/3x2/FR.svg" />
+              </button>
+            </div>
+          </div>
           <div class="-mr-2 flex md:hidden">
             <!-- Mobile menu button -->
             <button
@@ -120,6 +136,20 @@
           ">
           {{ 'menu.series' | translate }}
         </a>
+      </div>
+      <div class="flex justify-center py-2">
+        <button (click)="languageService.updateLanguage('en')">
+          <img
+            class="h-8 w-8 mx-1"
+            alt="United States"
+            src="http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" />
+        </button>
+        <button (click)="languageService.updateLanguage('fr')">
+          <img
+            class="h-8 w-8 mx-1"
+            alt="France"
+            src="http://purecatamphetamine.github.io/country-flag-icons/3x2/FR.svg" />
+        </button>
       </div>
     </div>
   </nav>
