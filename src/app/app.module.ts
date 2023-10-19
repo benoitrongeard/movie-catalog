@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -6,15 +6,44 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
 import { FilmsLayoutComponent } from './pages/films-layout/films-layout.component';
 import { SeriesLayoutComponent } from './pages/series-layout/series-layout.component';
 import { FiltersComponent } from './pages/filters/filters.component';
 import { ComboboxComponent } from './components/combobox/combobox.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfigurationService } from './services/configuration.service';
+import { Observable, switchMap } from 'rxjs';
+import { TmdbConfigurationService } from './services/tmdb/tmdb-configuration.service';
+import { TokenInterceptor } from './core/token.interceptor';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
+}
+
+/**
+ * Init the app with configuration and TMDB configuration
+ * @param configurationService Service to load the app configuration
+ * @param tmdbConfigurationService Service to load the TMDB configuration
+ * @returns () => Observable<boolean>
+ */
+export function initApp(
+  configurationService: ConfigurationService,
+  tmdbConfigurationService: TmdbConfigurationService
+): () => Observable<boolean> {
+  return () => {
+    // Return an observable that resolve the app configuration
+    return configurationService.loadConfig().pipe(
+      switchMap(() => {
+        // Return an observable that resolve the TMDB configuration
+        return tmdbConfigurationService.loadTMDBConfig();
+      })
+    );
+  };
 }
 
 @NgModule({
@@ -41,7 +70,19 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      multi: true,
+      deps: [ConfigurationService, TmdbConfigurationService],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

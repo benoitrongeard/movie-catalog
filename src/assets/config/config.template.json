@@ -1,0 +1,5 @@
+{
+  "production": false,
+  "tmdbApiUrl": "@[TMDB_API_URL]",
+  "tmdbApiToken": "@[TMDB_API_TOKEN]"
+}
