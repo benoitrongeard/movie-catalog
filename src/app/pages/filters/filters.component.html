@@ -10,7 +10,8 @@
         <app-combobox
           [data]="countries"
           [key]="'alpha2Key'"
-          [value]="'countryName'"></app-combobox>
+          [value]="'countryName'"
+          (newItemSelected)="countryChangeEvent($event)"></app-combobox>
       </div>
       <div>
         <label

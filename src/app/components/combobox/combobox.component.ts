@@ -1,4 +1,11 @@
-import { Component, Input, Signal, effect } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  Signal,
+  effect,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { StringUtils } from 'src/app/utils/string.utils';
@@ -17,7 +24,7 @@ export class ComboboxComponent<TData> {
       this._data = Object.create(value);
       this.filteredData = this._data;
 
-      this.selectedValue?.patchValue('');
+      this.select(null);
     }
   }
 
@@ -31,7 +38,10 @@ export class ComboboxComponent<TData> {
   // Value of generic data
   @Input({ required: true }) value?: string;
 
-  selectedValue: FormControl = new FormControl('');
+  // Output event when a generic data is selected
+  @Output() newItemSelected = new EventEmitter<TData | null>();
+
+  selectedValue: FormControl = new FormControl(null);
   filteredData!: TData[];
   showList = false;
 
@@ -56,8 +66,15 @@ export class ComboboxComponent<TData> {
     return this.value as keyof TData;
   }
 
-  select(value: TData) {
-    this.selectedValue?.patchValue(value[this.getValue()]);
+  /**
+   * Select a generic data and fire output event change
+   * @param value Generic data that selected
+   */
+  select(value: TData | null) {
+    this.selectedValue?.patchValue(
+      value != null ? value[this.getValue()] : null
+    );
+    this.newItemSelected.emit(value);
   }
 
   /**

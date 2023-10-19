@@ -13,4 +13,12 @@ export class FiltersComponent {
       this.countries = this.countryService.countrySignal();
     });
   }
+
+  /**
+   * Called when a country is selected in form
+   * @param country Country selected
+   */
+  countryChangeEvent(country: Country | null) {
+    console.log('changement de pays', country);
+  }
 }

@@ -6,5 +6,8 @@
   "menu": {
     "films": "Films EN",
     "series": "Series EN"
+  },
+  "filters": {
+    "countries": "Countries"
   }
 }
