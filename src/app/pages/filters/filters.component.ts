@@ -11,6 +11,7 @@ export class FiltersComponent {
   constructor(private countryService: CountryService) {
     effect(() => {
       this.countries = this.countryService.countrySignal();
+      //TODO RESET GLOBAL FORM
     });
   }
 
@@ -18,7 +19,7 @@ export class FiltersComponent {
    * Called when a country is selected in form
    * @param country Country selected
    */
-  countryChangeEvent(country: Country | null) {
+  countryChangeEvent(country: Country) {
     console.log('changement de pays', country);
   }
 }

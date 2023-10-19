@@ -24,7 +24,7 @@ export class ComboboxComponent<TData> {
       this._data = Object.create(value);
       this.filteredData = this._data;
 
-      this.select(null);
+      this.selectedValue?.patchValue('');
     }
   }
 
@@ -39,9 +39,9 @@ export class ComboboxComponent<TData> {
   @Input({ required: true }) value?: string;
 
   // Output event when a generic data is selected
-  @Output() newItemSelected = new EventEmitter<TData | null>();
+  @Output() newItemSelected = new EventEmitter<TData>();
 
-  selectedValue: FormControl = new FormControl(null);
+  selectedValue: FormControl = new FormControl('');
   filteredData!: TData[];
   showList = false;
 
@@ -70,10 +70,8 @@ export class ComboboxComponent<TData> {
    * Select a generic data and fire output event change
    * @param value Generic data that selected
    */
-  select(value: TData | null) {
-    this.selectedValue?.patchValue(
-      value != null ? value[this.getValue()] : null
-    );
+  select(value: TData) {
+    this.selectedValue?.patchValue(value[this.getValue()]);
     this.newItemSelected.emit(value);
   }
 
