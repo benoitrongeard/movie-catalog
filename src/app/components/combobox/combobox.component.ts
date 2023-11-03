@@ -41,6 +41,17 @@ export class ComboboxComponent<TData> {
   // Output event when a generic data is selected
   @Output() newItemSelected = new EventEmitter<TData>();
 
+  //Key of image url
+  @Input() imageKey?: string;
+
+  // Image url
+  @Input() imageUrl?: string;
+
+  // Image extension
+  @Input() imageExtension?: string | null;
+
+  @Input({ required: true }) label!: string;
+
   selectedValue: FormControl = new FormControl('');
   filteredData!: TData[];
   showList = false;
@@ -64,6 +75,10 @@ export class ComboboxComponent<TData> {
 
   getValue() {
     return this.value as keyof TData;
+  }
+
+  getImageKey() {
+    return this.imageKey as keyof TData;
   }
 
   /**

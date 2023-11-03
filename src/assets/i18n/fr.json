@@ -8,6 +8,7 @@
     "series": "Series"
   },
   "filters": {
-    "countries": "Pays"
+    "countries": "Pays",
+    "providers": "Fournisseurs"
   }
 }

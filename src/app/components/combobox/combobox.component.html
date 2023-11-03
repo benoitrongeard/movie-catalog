@@ -2,7 +2,7 @@
   <label
     for="combobox"
     class="block text-sm font-medium leading-6 text-gray-900">
-    {{ 'filters.countries' | translate }}
+    {{ label | translate }}
   </label>
   <div class="relative mt-2">
     <input
@@ -47,9 +47,10 @@
         (keyup.enter)="select(item)">
         <div class="flex items-center">
           <img
-            src="http://purecatamphetamine.github.io/country-flag-icons/3x2/{{
-              item[getKey()]
-            }}.svg"
+            *ngIf="imageUrl && imageKey"
+            src="{{ imageUrl }}/{{ item[getImageKey()] }}{{
+              imageExtension ?? ''
+            }}"
             alt=""
             class="h-6 w-6 flex-shrink-0 rounded-full" />
           <span class="ml-3 truncate hover:font-semibold">

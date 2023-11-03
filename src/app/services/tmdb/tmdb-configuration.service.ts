@@ -6,6 +6,7 @@ import {
   TmdbConfiguration,
 } from 'src/app/interfaces/tmdb-configuration.interface';
 import { ConfigurationService } from 'src/app/services/configuration.service';
+import { ObjectUtils } from 'src/app/utils/object.utils';
 
 @Injectable({
   providedIn: 'root',
@@ -20,12 +21,11 @@ export class TmdbConfigurationService {
 
   loadTMDBConfig(): Observable<boolean> {
     return this.httpClient
-      .get<TmdbConfiguration>(
-        this.configurationService.getTMDBApiUrl() + '/configuration'
-      )
+      .get(this.configurationService.getTMDBApiUrl() + '/configuration')
       .pipe(
-        map((config: TmdbConfiguration) => {
-          this.configuration = config;
+        map(config => {
+          this.configuration =
+            ObjectUtils.convertObjectToInterface<TmdbConfiguration>(config);
           return true;
         }),
         catchError((error: HttpErrorResponse) => {
@@ -35,7 +35,7 @@ export class TmdbConfigurationService {
       );
   }
 
-  getImages(): ImagesConfiguration {
+  getImageConfiguration(): ImagesConfiguration {
     return this.configuration?.images;
   }
 
