@@ -6,6 +6,7 @@ import { LanguageService } from 'src/app/services/language.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComboboxComponent } from 'src/app/components/combobox/combobox.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('FiltersComponent', () => {
   let component: FiltersComponent;
@@ -14,7 +15,11 @@ describe('FiltersComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FiltersComponent, ComboboxComponent],
-      imports: [TranslateModule.forRoot(), ReactiveFormsModule],
+      imports: [
+        TranslateModule.forRoot(),
+        ReactiveFormsModule,
+        HttpClientTestingModule,
+      ],
       providers: [LanguageService, CountryService],
     });
     fixture = TestBed.createComponent(FiltersComponent);
