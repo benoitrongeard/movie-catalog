@@ -20,18 +20,18 @@
           (newItemSelected)="countryChangeEvent($event)"></app-combobox>
       </div>
       <div class="sm:col-span-2" *ngIf="providers.length > 0">
-        <app-combobox
+        <app-combobox-with-badges
           [data]="providers"
           [key]="'providerId'"
           [value]="'providerName'"
           [label]="'filters.providers'"
-          (newItemSelected)="movieProviderChangeEvent($event)"
+          (newItemsSelected)="movieProviderChangeEvent($event)"
           [imageKey]="'logoPath'"
           [imageUrl]="
             tmdbImageConfiguration.secureBaseUrl +
             '/' +
             tmdbImageConfiguration.logoSizes[0]
-          "></app-combobox>
+          "></app-combobox-with-badges>
       </div>
       <div>
         <label

@@ -1,7 +1,7 @@
 import { Component, effect } from '@angular/core';
 import { Country, CountryService } from 'src/app/services/country.service';
 import { LanguageService } from './../../services/language.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TmdbMovieProvider } from 'src/app/interfaces/tmdb-movie-provider.interface';
 import { TmdbMovieProviderService } from 'src/app/services/tmdb/tmdb-movie-provider.service';
 import { TmdbConfigurationService } from 'src/app/services/tmdb/tmdb-configuration.service';
@@ -18,7 +18,7 @@ export class FiltersComponent {
   filtersForm: FormGroup = this.formBuilder.group({
     language: new FormControl<string | null>(null),
     region: new FormControl<string | null>(null),
-    with_watch_providers: new FormControl<string | null>(null),
+    with_watch_providers: new FormArray<FormControl<string>>([]),
   });
   tmdbImageConfiguration: ImagesConfiguration;
 
@@ -29,7 +29,6 @@ export class FiltersComponent {
     private formBuilder: FormBuilder,
     private tmdbconfig: TmdbConfigurationService
   ) {
-    console.log('toto');
     /// Get image configuration from TMDB
     this.tmdbImageConfiguration = tmdbconfig.getImageConfiguration();
 
@@ -41,6 +40,10 @@ export class FiltersComponent {
       this.filtersForm.controls['region'].reset();
       this.filtersForm.controls['with_watch_providers'].reset();
     });
+  }
+
+  get providersForm() {
+    return this.filtersForm.controls['with_watch_providers'] as FormArray;
   }
 
   /**
@@ -75,9 +78,11 @@ export class FiltersComponent {
    * Update form fields
    * @param provider TmdbMovieProvider selected
    */
-  movieProviderChangeEvent(provider: TmdbMovieProvider) {
-    this.filtersForm.controls['with_watch_providers'].setValue(
-      provider.providerId
-    );
+  movieProviderChangeEvent(providers: TmdbMovieProvider[]) {
+    this.providersForm.clear();
+    providers.forEach(provider => {
+      const control = new FormControl<string>(provider.providerId);
+      this.providersForm.push(control);
+    });
   }
 }

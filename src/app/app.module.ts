@@ -20,6 +20,7 @@ import { ConfigurationService } from './services/configuration.service';
 import { Observable, switchMap } from 'rxjs';
 import { TmdbConfigurationService } from './services/tmdb/tmdb-configuration.service';
 import { TokenInterceptor } from './core/token.interceptor';
+import { ComboboxWithBadgesComponent } from './components/combobox-with-badges/combobox-with-badges.component';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -54,6 +55,7 @@ export function initApp(
     SeriesLayoutComponent,
     FiltersComponent,
     ComboboxComponent,
+    ComboboxWithBadgesComponent,
   ],
   imports: [
     BrowserModule,

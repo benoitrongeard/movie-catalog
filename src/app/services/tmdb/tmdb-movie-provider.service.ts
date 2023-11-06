@@ -4,6 +4,7 @@ import { catchError, firstValueFrom, map } from 'rxjs';
 import { TmdbMovieProvider } from 'src/app/interfaces/tmdb-movie-provider.interface';
 import { ConfigurationService } from 'src/app/services/configuration.service';
 import { ObjectUtils } from 'src/app/utils/object.utils';
+import { StringUtils } from 'src/app/utils/string.utils';
 
 type DataResult = {
   results: TmdbMovieProvider[];
@@ -41,7 +42,10 @@ export class TmdbMovieProviderService {
               );
 
             providers.sort((a, b) =>
-              a.providerName < b.providerName ? -1 : 1
+              StringUtils.ignoreCaseAndDiacritic(a.providerName) <
+              StringUtils.ignoreCaseAndDiacritic(b.providerName)
+                ? -1
+                : 1
             );
             return providers;
           }),
