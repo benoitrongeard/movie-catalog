@@ -51,8 +51,11 @@ export class CountryService {
   }
 
   async registerLocale(locale: string) {
-    return registerLocale(
-      await import(`i18n-iso-countries/langs/${locale}.json`)
-    );
+    switch (locale) {
+      case 'fr':
+        return registerLocale(await import('i18n-iso-countries/langs/fr.json'));
+      case 'en':
+        return registerLocale(await import('i18n-iso-countries/langs/en.json'));
+    }
   }
 }
