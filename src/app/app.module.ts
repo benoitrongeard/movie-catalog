@@ -1,5 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { Observable, switchMap } from 'rxjs';
 import { TmdbConfigurationService } from './services/tmdb/tmdb-configuration.service';
 import { TokenInterceptor } from './core/token.interceptor';
 import { ComboboxWithBadgesComponent } from './components/combobox-with-badges/combobox-with-badges.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -56,6 +58,7 @@ export function initApp(
     FiltersComponent,
     ComboboxComponent,
     ComboboxWithBadgesComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ export function initApp(
     }),
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {

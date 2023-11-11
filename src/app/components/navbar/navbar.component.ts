@@ -1,8 +1,9 @@
-import { Component, Signal } from '@angular/core';
+import { Component, Signal, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, Event, RouterEvent } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { LanguageService } from 'src/app/services/language.service';
+import { SettingsComponent } from 'src/app/pages/settings/settings.component';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,7 @@ import { LanguageService } from 'src/app/services/language.service';
 export class NavbarComponent {
   isMobileMenuOpen = false;
   headerTitle$: Signal<string | undefined>;
+  @ViewChild(SettingsComponent, { static: true }) settings!: SettingsComponent;
 
   constructor(
     private router: Router,
@@ -30,5 +32,9 @@ export class NavbarComponent {
 
   toggleMenuMobile() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  openSettings() {
+    this.settings.open();
   }
 }
