@@ -8,6 +8,7 @@ import { FiltersComponent } from './pages/filters/filters.component';
 import { ComboboxComponent } from './components/combobox/combobox.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -24,6 +25,7 @@ describe('AppComponent', () => {
         NavbarComponent,
         FiltersComponent,
         ComboboxComponent,
+        SettingsComponent,
       ],
     })
   );
