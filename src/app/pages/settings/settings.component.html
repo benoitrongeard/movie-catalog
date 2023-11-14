@@ -17,39 +17,72 @@
           [@enterAnimation]>
           <div
             #slideover
-            class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-            <div class="px-4 sm:px-6">
-              <div class="flex items-start justify-between">
-                <h2
-                  class="text-base font-semibold leading-6 text-gray-900"
-                  id="slide-over-title">
-                  Panel title
-                </h2>
-                <div class="ml-3 flex h-7 items-center">
-                  <button
-                    (click)="close()"
-                    type="button"
-                    class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                    <span class="absolute -inset-2.5"></span>
-                    <span class="sr-only">Close panel</span>
-                    <svg
-                      class="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      aria-hidden="true">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
+            class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+            <div class="h-0 flex-1 overflow-y-auto">
+              <!-- Panel title -->
+              <div class="bg-gray-800 px-4 py-6 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <h2
+                    class="text-base font-semibold leading-6 text-white"
+                    id="slide-over-title">
+                    {{ 'menu.settings' | translate }}
+                  </h2>
+                  <div class="ml-3 flex h-7 items-center">
+                    <button
+                      (click)="close()"
+                      type="button"
+                      class="relative rounded-md bg-gray-800 text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+                      <span class="absolute -inset-2.5"></span>
+                      <span class="sr-only">Close panel</span>
+                      <svg
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        aria-hidden="true">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="mt-1">
+                  <p class="text-sm text-gray-300">
+                    Get started by filling in the information below to create
+                    your new project.
+                  </p>
                 </div>
               </div>
-            </div>
-            <div class="relative mt-6 flex-1 px-4 sm:px-6">
-              <!-- Content here -->
+
+              <!-- Language select -->
+              <div class="px-4 py-6 sm:px-6">
+                <app-select-input></app-select-input>
+              </div>
+
+              <!-- Country select with search -->
+
+              <div class="relative flex-1 px-4">
+                <!-- Flag icon list -->
+                <div class="block float-right">
+                  <div class="flex justify-around">
+                    <button (click)="languageService.updateLanguage('en')">
+                      <img
+                        class="h-8 w-8 mx-1"
+                        alt="GB Flag"
+                        src="http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" />
+                    </button>
+                    <button (click)="languageService.updateLanguage('fr')">
+                      <img
+                        class="h-8 w-8 mx-1"
+                        alt="FR Flag"
+                        src="http://purecatamphetamine.github.io/country-flag-icons/3x2/FR.svg" />
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

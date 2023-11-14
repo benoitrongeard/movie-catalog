@@ -19,8 +19,8 @@ export class ObjectUtils {
     if (o === Object(o) && !Array.isArray(o) && typeof o !== 'function') {
       const n: { [key: string]: object } = {};
       Object.keys(o).forEach((k: string) => {
-        const toto: string = this.toCamel(k);
-        n[toto] = this.keysToCamel(o[k] as { [key: string]: object });
+        const property: string = this.toCamel(k);
+        n[property] = this.keysToCamel(o[k] as { [key: string]: object });
       });
       return n;
     } else if (Array.isArray(o)) {

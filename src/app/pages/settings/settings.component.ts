@@ -6,6 +6,8 @@ import {
   HostListener,
   ViewChild,
 } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-settings',
@@ -28,6 +30,17 @@ import {
 export class SettingsComponent {
   @ViewChild('slideover', { static: false }) slideOver!: ElementRef;
   isOpen = false;
+  settingsForm: FormGroup;
+
+  constructor(
+    public languageService: LanguageService,
+    private _fb: FormBuilder
+  ) {
+    this.settingsForm = this._fb.group({
+      language: [this.languageService.languageSignal()],
+      country: [null],
+    });
+  }
 
   /**
    * Open the settings panel

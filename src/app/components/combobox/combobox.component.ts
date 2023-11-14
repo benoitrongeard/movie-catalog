@@ -20,6 +20,7 @@ export class ComboboxComponent<TData> {
 
   // Liste of generic data
   @Input({ required: true }) set data(value: TData[]) {
+    // When data changed, reset filtered data and selected value
     if (value) {
       this._data = Object.create(value);
       this.filteredData = this._data;

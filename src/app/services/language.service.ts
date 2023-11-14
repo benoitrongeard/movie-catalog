@@ -8,9 +8,7 @@ export class LanguageService {
   private languageSignal$: WritableSignal<string>;
 
   constructor(private translateService: TranslateService) {
-    this.translateService.setDefaultLang(
-      translateService.getBrowserLang() ?? 'en'
-    );
+    this.translateService.setDefaultLang(this.getBrowserLanguage() ?? 'en');
     this.languageSignal$ = signal(this.translateService.getDefaultLang());
   }
 
@@ -20,6 +18,10 @@ export class LanguageService {
 
   get defaultLanguage(): string {
     return this.translateService.getDefaultLang();
+  }
+
+  getBrowserLanguage(): string | undefined {
+    return this.translateService.getBrowserLang();
   }
 
   updateLanguage(language: string) {

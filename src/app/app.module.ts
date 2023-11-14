@@ -23,6 +23,7 @@ import { TmdbConfigurationService } from './services/tmdb/tmdb-configuration.ser
 import { TokenInterceptor } from './core/token.interceptor';
 import { ComboboxWithBadgesComponent } from './components/combobox-with-badges/combobox-with-badges.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { SelectInputComponent } from './components/select-input/select-input.component';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -59,6 +60,7 @@ export function initApp(
     ComboboxComponent,
     ComboboxWithBadgesComponent,
     SettingsComponent,
+    SelectInputComponent,
   ],
   imports: [
     BrowserModule,

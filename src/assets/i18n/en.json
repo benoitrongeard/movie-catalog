@@ -5,7 +5,11 @@
   },
   "menu": {
     "films": "Films EN",
-    "series": "Series EN"
+    "series": "Series EN",
+    "settings": "Settings"
+  },
+  "settings": {
+    "language": "Language"
   },
   "filters": {
     "countries": "Countries",

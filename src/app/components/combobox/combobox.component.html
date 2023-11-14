@@ -40,7 +40,7 @@
         class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 hover:text-white hover:bg-indigo-600 hover:font-semibold"
         id="option-{{ i }}"
         role="option"
-        aria-selected="true"
+        [attr.aria-selected]="selectedValue === item"
         tabindex="-1"
         *ngFor="let item of filteredData; index as i"
         (mousedown)="select(item)"
