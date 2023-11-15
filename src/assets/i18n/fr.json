@@ -9,10 +9,16 @@
     "settings": "Paramètres"
   },
   "settings": {
-    "language": "Langue"
+    "language": "Langue",
+    "country": "Pays",
+    "description": "Configurez la langue et le pays à utiliser pour l'application."
   },
   "filters": {
     "countries": "Pays",
     "providers": "Fournisseurs"
+  },
+  "language": {
+    "fr": "Français",
+    "en": "Anglais"
   }
 }

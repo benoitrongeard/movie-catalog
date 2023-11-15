@@ -18,7 +18,7 @@
           <div
             #slideover
             class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-            <div class="h-0 flex-1 overflow-y-auto">
+            <div class="h-0 flex-1 overflow-y-auto" [formGroup]="settingsForm">
               <!-- Panel title -->
               <div class="bg-gray-800 px-4 py-6 sm:px-6">
                 <div class="flex items-center justify-between">
@@ -51,15 +51,16 @@
                 </div>
                 <div class="mt-1">
                   <p class="text-sm text-gray-300">
-                    Get started by filling in the information below to create
-                    your new project.
+                    {{ 'settings.description' | translate }}
                   </p>
                 </div>
               </div>
 
               <!-- Language select -->
               <div class="px-4 py-6 sm:px-6">
-                <app-select-input></app-select-input>
+                <app-select-input
+                  [controlName]="languageControl"
+                  [data]="languages"></app-select-input>
               </div>
 
               <!-- Country select with search -->

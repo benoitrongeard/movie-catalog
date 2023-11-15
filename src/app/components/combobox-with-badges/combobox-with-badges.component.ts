@@ -32,11 +32,8 @@ export class ComboboxWithBadgesComponent<TData> {
     return this._data;
   }
 
-  // Key of generic data
-  @Input({ required: true }) key?: string;
-
-  // Value of generic data
-  @Input({ required: true }) value?: string;
+  // Key used to display label value of generic data
+  @Input({ required: true }) labelKey?: string;
 
   // Output event when a generic data is selected
   @Output() newItemsSelected = new EventEmitter<TData[]>();
@@ -70,12 +67,8 @@ export class ComboboxWithBadgesComponent<TData> {
     });
   }
 
-  getKey() {
-    return this.key as keyof TData;
-  }
-
-  getValue() {
-    return this.value as keyof TData;
+  getLabelKey() {
+    return this.labelKey as keyof TData;
   }
 
   getImageKey() {
@@ -115,8 +108,9 @@ export class ComboboxWithBadgesComponent<TData> {
    */
   orderBadges() {
     this.selectedBadges.sort((a, b) => {
-      return StringUtils.ignoreCaseAndDiacritic(a[this.getValue()] as string) >
-        StringUtils.ignoreCaseAndDiacritic(b[this.getValue()] as string)
+      return StringUtils.ignoreCaseAndDiacritic(
+        a[this.getLabelKey()] as string
+      ) > StringUtils.ignoreCaseAndDiacritic(b[this.getLabelKey()] as string)
         ? 1
         : -1;
     });
@@ -145,7 +139,7 @@ export class ComboboxWithBadgesComponent<TData> {
     if (value && value.length > 0) {
       this.filteredData = this.data?.filter(item =>
         StringUtils.ignoreCaseAndDiacritic(
-          item[this.getValue()] as string
+          item[this.getLabelKey()] as string
         ).includes(StringUtils.ignoreCaseAndDiacritic(value))
       );
       return;

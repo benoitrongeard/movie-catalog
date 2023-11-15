@@ -5,8 +5,12 @@ import {
   ElementRef,
   HostListener,
   ViewChild,
+  effect,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Country } from 'src/app/interfaces/country-interface';
+import { LanguageListInterface } from 'src/app/interfaces/language-list-interface';
+import { CountryService } from 'src/app/services/country.service';
 import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
@@ -30,16 +34,27 @@ import { LanguageService } from 'src/app/services/language.service';
 export class SettingsComponent {
   @ViewChild('slideover', { static: false }) slideOver!: ElementRef;
   isOpen = false;
-  settingsForm: FormGroup;
+  settingsForm!: FormGroup;
+  countries!: Country[];
+  languages!: LanguageListInterface[];
 
   constructor(
     public languageService: LanguageService,
+    private _countryService: CountryService,
     private _fb: FormBuilder
   ) {
-    this.settingsForm = this._fb.group({
-      language: [this.languageService.languageSignal()],
-      country: [null],
+    this.languages = this.languageService.getLanguageList();
+    effect(() => {
+      this.settingsForm = this._fb.group({
+        language: [this.languageService.languageSignal()],
+        country: [this._countryService.countrySignal()],
+      });
+      this.countries = this._countryService.countriesSignal();
     });
+  }
+
+  resetForm() {
+    this.settingsForm.reset();
   }
 
   /**
@@ -54,6 +69,14 @@ export class SettingsComponent {
    */
   close() {
     this.isOpen = false;
+  }
+
+  get languageControl() {
+    return this.settingsForm.get('language');
+  }
+
+  get countryControl() {
+    return this.settingsForm.get('country');
   }
 
   /**

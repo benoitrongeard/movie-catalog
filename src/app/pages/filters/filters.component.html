@@ -9,12 +9,11 @@
       <div class="sm:col-span-2">
         <app-combobox
           [data]="countries"
-          [key]="'alpha2Key'"
           [imageKey]="'alpha2Key'"
           [imageUrl]="
             'https://purecatamphetamine.github.io/country-flag-icons/3x2'
           "
-          [value]="'countryName'"
+          [labelKey]="'countryName'"
           [label]="'filters.countries'"
           [imageExtension]="'.svg'"
           (newItemSelected)="countryChangeEvent($event)"></app-combobox>
@@ -22,8 +21,7 @@
       <div class="sm:col-span-2" *ngIf="providers.length > 0">
         <app-combobox-with-badges
           [data]="providers"
-          [key]="'providerId'"
-          [value]="'providerName'"
+          [labelKey]="'providerName'"
           [label]="'filters.providers'"
           (newItemsSelected)="movieProviderChangeEvent($event)"
           [imageKey]="'logoPath'"

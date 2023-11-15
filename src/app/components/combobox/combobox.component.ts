@@ -33,11 +33,8 @@ export class ComboboxComponent<TData> {
     return this._data;
   }
 
-  // Key of generic data
-  @Input({ required: true }) key?: string;
-
-  // Value of generic data
-  @Input({ required: true }) value?: string;
+  // Key used to display label value of generic data
+  @Input({ required: true }) labelKey?: string;
 
   // Output event when a generic data is selected
   @Output() newItemSelected = new EventEmitter<TData>();
@@ -70,12 +67,8 @@ export class ComboboxComponent<TData> {
     });
   }
 
-  getKey() {
-    return this.key as keyof TData;
-  }
-
-  getValue() {
-    return this.value as keyof TData;
+  getLabelKey() {
+    return this.labelKey as keyof TData;
   }
 
   getImageKey() {
@@ -87,7 +80,7 @@ export class ComboboxComponent<TData> {
    * @param value Generic data that selected
    */
   select(value: TData) {
-    this.selectedValue?.patchValue(value[this.getValue()]);
+    this.selectedValue?.patchValue(value[this.getLabelKey()]);
     this.newItemSelected.emit(value);
   }
 
@@ -115,11 +108,11 @@ export class ComboboxComponent<TData> {
       this.filteredData = this.data
         ?.filter(item =>
           StringUtils.ignoreCaseAndDiacritic(
-            item[this.getValue()] as string
+            item[this.getLabelKey()] as string
           ).includes(StringUtils.ignoreCaseAndDiacritic(value))
         )
         .sort((a, b) => {
-          return a[this.getValue()] > b[this.getValue()] ? 1 : -1;
+          return a[this.getLabelKey()] > b[this.getLabelKey()] ? 1 : -1;
         });
       return;
     }

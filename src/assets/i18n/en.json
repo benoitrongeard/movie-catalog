@@ -9,7 +9,9 @@
     "settings": "Settings"
   },
   "settings": {
-    "language": "Language"
+    "language": "Language",
+    "country": "Country",
+    "description": "Configure application's language and country."
   },
   "filters": {
     "countries": "Countries",

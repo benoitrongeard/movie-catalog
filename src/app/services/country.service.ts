@@ -5,32 +5,50 @@ import {
   getNames,
   registerLocale,
 } from 'i18n-iso-countries';
-
-export interface Country {
-  countryName: string;
-  alpha2Key: string;
-}
+import { Country } from '../interfaces/country-interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CountryService {
-  countries!: Country[];
-  countrySignal$: WritableSignal<Country[]> = signal([]);
+  // List of countries, depend of current language
+  private _countriesSignal$: WritableSignal<Country[]> = signal([]);
+  // Current country selected
+  private _countrySignal$: WritableSignal<Country | null> = signal(null);
 
   constructor(private languageService: LanguageService) {
     effect(() => {
-      const language = this.languageService.languageSignal();
-      if (language != null) {
-        this.registerLocale(language).then(() => {
-          this.countries = this.constructDTO(getNames(language));
-          this.countrySignal$.set(this.countries);
-        });
-      }
+      // Refresh countries list and current country when language changed
+      this.loadCountries(this.languageService.languageSignal());
     });
   }
 
-  constructDTO(
+  /**
+   * Load locale for given language and update countries
+   * @param language Language to load
+   */
+  loadCountries(language: string) {
+    if (language != null) {
+      this.registerLocale(language).then(() => {
+        const countries = this.createCountries(getNames(language));
+        // Update countries list
+        this._countriesSignal$.set(countries);
+
+        // Update current country
+        const currentCountry = countries.find(
+          country => country.alpha2Key == navigator?.language?.split('-')[1]
+        );
+        this._countrySignal$.set(currentCountry ?? null);
+      });
+    }
+  }
+
+  /**
+   * Map TMDB country list to Country interface list
+   * @param countries LocalizedCountryNames TMDB object
+   * @returns Array of {@link Country}
+   */
+  createCountries(
     countries: LocalizedCountryNames<{
       select: 'official';
     }>
@@ -46,8 +64,12 @@ export class CountryService {
     return countriesDTO;
   }
 
+  get countriesSignal() {
+    return this._countriesSignal$.asReadonly();
+  }
+
   get countrySignal() {
-    return this.countrySignal$.asReadonly();
+    return this._countrySignal$.asReadonly();
   }
 
   async registerLocale(locale: string) {

@@ -1,11 +1,12 @@
 import { Component, effect } from '@angular/core';
-import { Country, CountryService } from 'src/app/services/country.service';
+import { CountryService } from 'src/app/services/country.service';
 import { LanguageService } from './../../services/language.service';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TmdbMovieProvider } from 'src/app/interfaces/tmdb-movie-provider.interface';
 import { TmdbMovieProviderService } from 'src/app/services/tmdb/tmdb-movie-provider.service';
 import { TmdbConfigurationService } from 'src/app/services/tmdb/tmdb-configuration.service';
 import { ImagesConfiguration } from 'src/app/interfaces/tmdb-configuration.interface';
+import { Country } from 'src/app/interfaces/country-interface';
 
 @Component({
   selector: 'app-filters',
@@ -34,7 +35,7 @@ export class FiltersComponent {
 
     /// When country list changed, we need to reload the form taht depends on it
     effect(() => {
-      this.countries = this.countryService.countrySignal();
+      this.countries = this.countryService.countriesSignal();
       this.providers = [];
       this.filtersForm.controls['language'].reset();
       this.filtersForm.controls['region'].reset();
