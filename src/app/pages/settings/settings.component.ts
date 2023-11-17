@@ -7,7 +7,7 @@ import {
   ViewChild,
   effect,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { Country } from 'src/app/interfaces/country-interface';
 import { LanguageListInterface } from 'src/app/interfaces/language-list-interface';
 import { CountryService } from 'src/app/services/country.service';
@@ -44,15 +44,21 @@ export class SettingsComponent {
     private _fb: FormBuilder
   ) {
     effect(() => {
-      this.initForm();
       this.countries = this._countryService.countriesSignal();
       this.languages = this.languageService.getLanguageList();
+      this.initForm();
     });
   }
 
+  /**
+   * Initialiez/Reset the form
+   */
   initForm() {
+    const currentLanguage = this.languages?.find(
+      l => l.language == this.languageService.languageSignal()
+    );
     this.settingsForm = this._fb.group({
-      language: [this.languageService.languageSignal()],
+      language: [currentLanguage],
       country: [this._countryService.countrySignal()?.alpha2Key],
     });
   }
@@ -73,14 +79,17 @@ export class SettingsComponent {
    */
   close() {
     this.isOpen = false;
+    this.initForm();
   }
 
   get languageControl() {
-    return this.settingsForm.get('language');
+    return this.settingsForm.get(
+      'language'
+    ) as AbstractControl<LanguageListInterface>;
   }
 
   get countryControl() {
-    return this.settingsForm.get('country');
+    return this.settingsForm.get('country') as AbstractControl<Country>;
   }
 
   /**
@@ -98,7 +107,6 @@ export class SettingsComponent {
     const clickedInside = this.slideOver.nativeElement.contains(targetElement);
     if (!clickedInside) {
       this.close();
-      this.initForm();
     }
   }
 }

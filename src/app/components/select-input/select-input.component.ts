@@ -24,7 +24,7 @@ export class SelectInputComponent<TData> {
   }
 
   // Control name to bind
-  @Input({ required: true }) set controlName(value: AbstractControl | null) {
+  @Input({ required: true }) set controlName(value: AbstractControl<TData>) {
     if (value) {
       this._controlName = value;
     }
@@ -62,21 +62,6 @@ export class SelectInputComponent<TData> {
   }
 
   /**
-   * Get the label of selected generic data from the current form control name
-   */
-  getLabelFromControl() {
-    return this.data.find(
-      d => d[this.getValueKey()] === this.controlName?.value
-    )?.[this.getLabelKey()] as string;
-  }
-
-  getImageFromControl() {
-    return this.data.find(
-      d => d[this.getValueKey()] === this.controlName?.value
-    )?.[this.getImageKey()] as string;
-  }
-
-  /**
    * Show suggestion list on focus
    */
   toggleList() {
@@ -95,6 +80,6 @@ export class SelectInputComponent<TData> {
    * @param value Generic data that selected
    */
   select(value: TData) {
-    this.controlName?.patchValue(value[this.getValueKey()]);
+    this.controlName?.patchValue(value);
   }
 }
