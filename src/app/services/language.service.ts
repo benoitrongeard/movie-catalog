@@ -1,6 +1,7 @@
 import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageListInterface } from '../interfaces/language-list-interface';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,12 +19,18 @@ export class LanguageService {
   }
 
   private async initLanguageList() {
+    this.languageList = [];
     const defaultsLanguage: LanguageListInterface[] = [
       {
         language: 'en',
-        name: 'language.en',
+        name: await firstValueFrom(this.translateService.get('language.en')),
+        iconName: 'GB',
       },
-      { language: 'fr', name: 'language.fr' },
+      {
+        language: 'fr',
+        name: await firstValueFrom(this.translateService.get('language.fr')),
+        iconName: 'FR',
+      },
     ];
     this.languageList.push(...defaultsLanguage);
   }
@@ -44,8 +51,9 @@ export class LanguageService {
     return this.translateService.getBrowserLang();
   }
 
-  updateLanguage(language: string) {
-    this.translateService.use(language);
+  async updateLanguage(language: string) {
+    await firstValueFrom(this.translateService.use(language));
+    await this.initLanguageList();
     this.languageSignal$.set(language);
   }
 }

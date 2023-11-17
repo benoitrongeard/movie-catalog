@@ -16,5 +16,9 @@
   "filters": {
     "countries": "Countries",
     "providers": "Providers"
+  },
+  "language": {
+    "fr": "French",
+    "en": "English"
   }
 }

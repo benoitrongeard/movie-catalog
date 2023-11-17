@@ -60,30 +60,16 @@
               <div class="px-4 py-6 sm:px-6">
                 <app-select-input
                   [controlName]="languageControl"
-                  [data]="languages"></app-select-input>
+                  [data]="languages"
+                  [labelKey]="'name'"
+                  [valueKey]="'language'"
+                  [imageKey]="'iconName'"
+                  [imageUrl]="
+                    'http://purecatamphetamine.github.io/country-flag-icons/3x2/'
+                  "></app-select-input>
               </div>
 
               <!-- Country select with search -->
-
-              <div class="relative flex-1 px-4">
-                <!-- Flag icon list -->
-                <div class="block float-right">
-                  <div class="flex justify-around">
-                    <button (click)="languageService.updateLanguage('en')">
-                      <img
-                        class="h-8 w-8 mx-1"
-                        alt="GB Flag"
-                        src="http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg" />
-                    </button>
-                    <button (click)="languageService.updateLanguage('fr')">
-                      <img
-                        class="h-8 w-8 mx-1"
-                        alt="FR Flag"
-                        src="http://purecatamphetamine.github.io/country-flag-icons/3x2/FR.svg" />
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

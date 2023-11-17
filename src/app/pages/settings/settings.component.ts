@@ -43,13 +43,17 @@ export class SettingsComponent {
     private _countryService: CountryService,
     private _fb: FormBuilder
   ) {
-    this.languages = this.languageService.getLanguageList();
     effect(() => {
-      this.settingsForm = this._fb.group({
-        language: [this.languageService.languageSignal()],
-        country: [this._countryService.countrySignal()],
-      });
+      this.initForm();
       this.countries = this._countryService.countriesSignal();
+      this.languages = this.languageService.getLanguageList();
+    });
+  }
+
+  initForm() {
+    this.settingsForm = this._fb.group({
+      language: [this.languageService.languageSignal()],
+      country: [this._countryService.countrySignal()?.alpha2Key],
     });
   }
 
@@ -94,6 +98,7 @@ export class SettingsComponent {
     const clickedInside = this.slideOver.nativeElement.contains(targetElement);
     if (!clickedInside) {
       this.close();
+      this.initForm();
     }
   }
 }

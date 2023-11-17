@@ -15,11 +15,11 @@
       (focusout)="hideDataList()">
       <span class="flex items-center">
         <img
-          src="http://purecatamphetamine.github.io/country-flag-icons/3x2/GB.svg"
-          alt=""
+          src="{{ imageUrl }}/{{ getImageFromControl() }}.{{ imageExtension }}"
+          alt="{{ getImageFromControl() }}"
           class="h-5 w-5 flex-shrink-0" />
         <span class="ml-3 block truncate">
-          {{ controlName?.value }}
+          {{ getLabelFromControl() }}
         </span>
       </span>
       <span
@@ -40,28 +40,24 @@
     <ul
       *ngIf="showList"
       class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-      tabindex="-1"
-      role="listbox"
-      aria-labelledby="listbox-label"
-      aria-activedescendant="listbox-option-3">
-      <!--
-          Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-  
-          Highlighted: "bg-indigo-600 text-white", Not Highlighted: "text-gray-900"
-        -->
+      role="listbox">
       <li
-        class="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9"
-        id="listbox-option-0"
+        class="text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white"
+        id="option-{{ i }}"
         role="option"
-        aria-selected="false"
-        *ngFor="let item of data">
+        [attr.aria-selected]="false"
+        tabindex="0"
+        *ngFor="let item of data; index as i"
+        (mousedown)="select(item)">
         <div class="flex items-center">
           <img
-            src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt=""
-            class="h-5 w-5 flex-shrink-0 rounded-full" />
+            src="{{ imageUrl }}/{{ item[getImageKey()] }}.{{ imageExtension }}"
+            alt="{{ getImageFromControl() }}"
+            class="h-5 w-5 flex-shrink-0" />
           <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
-          <span class="font-normal ml-3 block truncate">Wade Cooper</span>
+          <span class="font-normal ml-3 block truncate">
+            {{ item[getLabelKey()] }}
+          </span>
         </div>
       </li>
 
