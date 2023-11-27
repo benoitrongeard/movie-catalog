@@ -6,18 +6,6 @@
   </div>
   <form class="mx-auto mt-4 max-w-xl sm:mt-8">
     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-      <div class="sm:col-span-2">
-        <app-combobox
-          [data]="countries"
-          [imageKey]="'alpha2Key'"
-          [imageUrl]="
-            'https://purecatamphetamine.github.io/country-flag-icons/3x2'
-          "
-          [labelKey]="'countryName'"
-          [label]="'filters.countries'"
-          [imageExtension]="'.svg'"
-          (newItemSelected)="countryChangeEvent($event)"></app-combobox>
-      </div>
       <div class="sm:col-span-2" *ngIf="providers.length > 0">
         <app-combobox-with-badges
           [data]="providers"

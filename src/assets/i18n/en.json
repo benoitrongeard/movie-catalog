@@ -3,6 +3,10 @@
     "filters": "Filters",
     "search": "Search"
   },
+  "buttons": {
+    "cancel": "Cancel",
+    "save": "Save"
+  },
   "menu": {
     "films": "Films EN",
     "series": "Series EN",

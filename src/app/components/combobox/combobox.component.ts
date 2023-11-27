@@ -2,11 +2,12 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   Signal,
   effect,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { StringUtils } from 'src/app/utils/string.utils';
 
@@ -15,8 +16,9 @@ import { StringUtils } from 'src/app/utils/string.utils';
   templateUrl: './combobox.component.html',
   styleUrls: ['./combobox.component.css'],
 })
-export class ComboboxComponent<TData> {
+export class ComboboxComponent<TData> implements OnInit {
   private _data!: TData[];
+  private _controlName!: AbstractControl<TData>;
 
   // Liste of generic data
   @Input({ required: true }) set data(value: TData[]) {
@@ -48,7 +50,19 @@ export class ComboboxComponent<TData> {
   // Image extension
   @Input() imageExtension?: string | null;
 
-  @Input({ required: true }) label!: string;
+  // Label of input
+  @Input({ required: true }) labelField!: string;
+
+  // Control name to bind
+  @Input({ required: true }) set controlName(value: AbstractControl<TData>) {
+    if (value) {
+      this._controlName = value;
+    }
+  }
+
+  get controlName() {
+    return this._controlName;
+  }
 
   selectedValue: FormControl = new FormControl('');
   filteredData!: TData[];
@@ -67,6 +81,10 @@ export class ComboboxComponent<TData> {
     });
   }
 
+  ngOnInit(): void {
+    this.selectedValue.patchValue(this.controlName?.value[this.getLabelKey()]);
+  }
+
   getLabelKey() {
     return this.labelKey as keyof TData;
   }
@@ -81,6 +99,11 @@ export class ComboboxComponent<TData> {
    */
   select(value: TData) {
     this.selectedValue?.patchValue(value[this.getLabelKey()]);
+
+    if (this.controlName) {
+      this.controlName.patchValue(value);
+    }
+
     this.newItemSelected.emit(value);
   }
 
@@ -96,6 +119,13 @@ export class ComboboxComponent<TData> {
    */
   hideDataList() {
     this.showList = false;
+  }
+
+  /**
+   * Toggle suggestion list on click
+   */
+  toggleDataList() {
+    this.showList = !this.showList;
   }
 
   /**

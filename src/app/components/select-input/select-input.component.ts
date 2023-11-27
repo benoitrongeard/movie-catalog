@@ -9,7 +9,7 @@ import { AbstractControl } from '@angular/forms';
 export class SelectInputComponent<TData> {
   showList = false;
   private _data!: TData[];
-  private _controlName!: AbstractControl;
+  private _controlName!: AbstractControl<TData>;
 
   // Liste of generic data
   @Input({ required: true }) set data(value: TData[]) {
@@ -48,6 +48,9 @@ export class SelectInputComponent<TData> {
 
   // Image extension
   @Input() imageExtension?: string = 'svg';
+
+  // Label of input
+  @Input({ required: true }) labelField!: string;
 
   getLabelKey() {
     return this.labelKey as keyof TData;

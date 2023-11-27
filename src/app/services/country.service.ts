@@ -16,6 +16,8 @@ export class CountryService {
   // Current country selected
   private _countrySignal$: WritableSignal<Country | null> = signal(null);
 
+  private _currentCountry!: Country;
+
   constructor(private languageService: LanguageService) {
     effect(() => {
       // Refresh countries list and current country when language changed
@@ -36,7 +38,10 @@ export class CountryService {
 
         // Update current country
         const currentCountry = countries.find(
-          country => country.alpha2Key == navigator?.language?.split('-')[1]
+          country =>
+            country.alpha2Key ==
+            (this._currentCountry?.alpha2Key ??
+              navigator?.language?.split('-')[1])
         );
         this._countrySignal$.set(currentCountry ?? null);
       });
@@ -70,6 +75,11 @@ export class CountryService {
 
   get countrySignal() {
     return this._countrySignal$.asReadonly();
+  }
+
+  updateCountry(country: Country) {
+    this._countrySignal$.set(country);
+    this._currentCountry = country;
   }
 
   async registerLocale(locale: string) {

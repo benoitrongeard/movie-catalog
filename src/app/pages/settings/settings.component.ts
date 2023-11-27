@@ -59,10 +59,21 @@ export class SettingsComponent {
     );
     this.settingsForm = this._fb.group({
       language: [currentLanguage],
-      country: [this._countryService.countrySignal()?.alpha2Key],
+      country: [this._countryService.countrySignal()],
     });
   }
 
+  get languageControl() {
+    return this.settingsForm.get(
+      'language'
+    ) as AbstractControl<LanguageListInterface>;
+  }
+
+  get countryControl() {
+    return this.settingsForm.get('country') as AbstractControl<Country>;
+  }
+
+  /* Reset the form */
   resetForm() {
     this.settingsForm.reset();
   }
@@ -82,14 +93,13 @@ export class SettingsComponent {
     this.initForm();
   }
 
-  get languageControl() {
-    return this.settingsForm.get(
-      'language'
-    ) as AbstractControl<LanguageListInterface>;
-  }
-
-  get countryControl() {
-    return this.settingsForm.get('country') as AbstractControl<Country>;
+  /**
+   * Save the settings
+   */
+  save() {
+    this.languageService.updateLanguage(this.languageControl.value.language);
+    this._countryService.updateCountry(this.countryControl.value);
+    this.close();
   }
 
   /**

@@ -57,12 +57,13 @@
               </div>
 
               <!-- Language select -->
-              <div class="px-4 py-6 sm:px-6">
+              <div class="px-4 py-3 sm:px-6">
                 <app-select-input
                   [controlName]="languageControl"
                   [data]="languages"
                   [labelKey]="'name'"
                   [valueKey]="'language'"
+                  [labelField]="'settings.language'"
                   [imageKey]="'iconName'"
                   [imageUrl]="
                     'http://purecatamphetamine.github.io/country-flag-icons/3x2/'
@@ -70,6 +71,34 @@
               </div>
 
               <!-- Country select with search -->
+              <div class="px-4 py-3 pb-6 sm:px-6">
+                <app-combobox
+                  [controlName]="countryControl"
+                  [data]="countries"
+                  [imageKey]="'alpha2Key'"
+                  [imageUrl]="
+                    'https://purecatamphetamine.github.io/country-flag-icons/3x2'
+                  "
+                  [labelKey]="'countryName'"
+                  [labelField]="'filters.countries'"
+                  [imageExtension]="'.svg'"></app-combobox>
+              </div>
+
+              <!-- Button save or cancel -->
+              <div class="flex px-4 py-6 border-t border-gray-200 sm:px-6">
+                <button
+                  (click)="close()"
+                  type="button"
+                  class="mr-3 flex-1 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                  {{ 'buttons.cancel' | translate }}
+                </button>
+                <button
+                  (click)="save()"
+                  type="button"
+                  class="ml-3 flex-1 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  {{ 'buttons.save' | translate }}
+                </button>
+              </div>
             </div>
           </div>
         </div>
