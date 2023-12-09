@@ -37,7 +37,7 @@
         "plugin:@angular-eslint/template/accessibility"
       ],
       "rules": {
-        "@angular-eslint/template/label-has-associated-control": "off" 
+        "@angular-eslint/template/label-has-associated-control": "off"
       }
     },
     {

@@ -24,6 +24,8 @@ import { TokenInterceptor } from './core/token.interceptor';
 import { ComboboxWithBadgesComponent } from './components/combobox-with-badges/combobox-with-badges.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { SelectInputComponent } from './components/select-input/select-input.component';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastrComponent } from './components/toastr/toastr.component';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -61,6 +63,7 @@ export function initApp(
     ComboboxWithBadgesComponent,
     SettingsComponent,
     SelectInputComponent,
+    ToastrComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,9 @@ export function initApp(
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      toastComponent: ToastrComponent,
+    }),
   ],
   providers: [
     {

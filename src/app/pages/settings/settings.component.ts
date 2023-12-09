@@ -12,6 +12,7 @@ import { Country } from 'src/app/interfaces/country-interface';
 import { LanguageListInterface } from 'src/app/interfaces/language-list-interface';
 import { CountryService } from 'src/app/services/country.service';
 import { LanguageService } from 'src/app/services/language.service';
+import { CustomToastrService } from 'src/app/services/toastr.service';
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +20,7 @@ import { LanguageService } from 'src/app/services/language.service';
   styleUrls: ['./settings.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('enterAnimation', [
+    trigger('slideAnimation', [
       transition(':enter', [
         style({ transform: 'translateX(100%)' }),
         animate('500ms', style({ transform: 'translateX(0)' })),
@@ -41,7 +42,8 @@ export class SettingsComponent {
   constructor(
     public languageService: LanguageService,
     private _countryService: CountryService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _toastr: CustomToastrService
   ) {
     effect(() => {
       this.countries = this._countryService.countriesSignal();
@@ -100,6 +102,7 @@ export class SettingsComponent {
     this.languageService.updateLanguage(this.languageControl.value.language);
     this._countryService.updateCountry(this.countryControl.value);
     this.close();
+    this._toastr.show();
   }
 
   /**
