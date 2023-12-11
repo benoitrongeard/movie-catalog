@@ -6,4 +6,7 @@ import { injectSpeedInsights } from '@vercel/speed-insights';
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .catch(err => console.error(err))
-  .finally(() => injectSpeedInsights);
+  .finally(() => {
+    console.log('Activate Vercel Speed Insights');
+    injectSpeedInsights({});
+  });
