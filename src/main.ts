@@ -9,6 +9,6 @@ platformBrowserDynamic()
   .catch(err => console.error(err))
   .finally(() => {
     console.log('Activate Vercel Speed Insights & Analytics');
-    injectSpeedInsights;
+    injectSpeedInsights({});
     inject();
   });
