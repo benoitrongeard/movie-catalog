@@ -53,10 +53,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "movie-catalog:build:production"
+              "buildTarget": "movie-catalog:build:production"
             },
             "development": {
-              "browserTarget": "movie-catalog:build:development"
+              "buildTarget": "movie-catalog:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "movie-catalog:build"
+            "buildTarget": "movie-catalog:build"
           }
         },
         "test": {
