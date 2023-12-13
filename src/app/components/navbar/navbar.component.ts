@@ -21,7 +21,11 @@ export class NavbarComponent {
           (e: Event | RouterEvent): e is RouterEvent =>
             e instanceof NavigationEnd
         ),
-        map((e: RouterEvent) => e?.url?.replaceAll('/', ''))
+        map(
+          (e: RouterEvent) =>
+            (e as NavigationEnd)?.urlAfterRedirects?.replaceAll('/', '') ??
+            (e as NavigationEnd)?.url?.replaceAll('/', '')
+        )
       )
     );
   }

@@ -15,6 +15,7 @@ const routes: Routes = [
     component: SeriesLayoutComponent,
     data: { title: 'menu.series' },
   },
+  { path: '**', redirectTo: '/films', pathMatch: 'full' },
 ];
 
 @NgModule({
