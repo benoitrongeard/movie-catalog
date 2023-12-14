@@ -1,10 +1,33 @@
 # MovieCatalog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.2.
+![Vercel](https://vercelbadge.vercel.app/api/benoits-projects-d03429db/movie-catalog) ![app](https://movie-catalog-flax.vercel.app/)
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6
+
+## Work with vercel
+
+Install vercel :
+
+```bash
+npm i -g vercel
+```
+
+Configure vercel :
+
+```bash
+vercel login
+```
+
+Adding env variable inside vercel `TMDB_API_URL`, `PRODUCTION`, `TMDB_API_TOKEN`;
+
+## Serverless function
+
+Serverless function are located inside `api` folder. They are deployed on vercel and can be called with the following url : `https://movie-catalog.vercel.app/api/{route}}`. {route} is the name of the api behind TMDB api.
+This function generate a proxy to TMDB api, and adding the TMDB token in headers to secure the usage of the token.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `vercel dev` for a dev server. Navigate to `http://localhost:3000/` and `http://localhost:3000/api/{route}`. The application and vercel will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -12,7 +35,11 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Preview build
+
+Run `vercel deploy` and go to the url provided by vercel.
 
 ## Running unit tests
 

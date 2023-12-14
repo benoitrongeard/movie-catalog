@@ -9,6 +9,12 @@ fs.readFile(
       return console.log(err);
     }
 
+    const vercelUrl = ['preview', 'development'].includes(
+      process.env['VERCEL_ENV']
+    )
+      ? process.env['VERCEL_URL']
+      : 'movie-catalog-flax.vercel.app';
+
     // Replace env value
     const result = data
       .replace(/@\[TMDB_API_URL\]/g, process.env['TMDB_API_URL'] ?? '')
@@ -16,9 +22,7 @@ fs.readFile(
       .replace(/@\[PRODUCTION\]/g, process.env['PRODUCTION'] ?? '')
       .replace(
         /@\[VERCEL_PROXY_URL\]/g,
-        process.env['VERCEL_URL']
-          ? `https://${process.env['VERCEL_URL']}/api`
-          : ''
+        process.env['VERCEL_URL'] ? `https://${vercelUrl}/api` : ''
       );
 
     // Update the file
