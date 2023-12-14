@@ -1,5 +1,6 @@
 {
   "production": "@[PRODUCTION]",
   "tmdbApiUrl": "@[TMDB_API_URL]",
-  "tmdbApiToken": "@[TMDB_API_TOKEN]"
+  "tmdbApiToken": "@[TMDB_API_TOKEN]",
+  "vercelProxyUrl": "@[VERCEL_PROXY_URL]"
 }

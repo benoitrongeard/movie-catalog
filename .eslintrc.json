@@ -2,7 +2,8 @@
   "root": true,
   "ignorePatterns": ["projects/**/*"],
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "overrides": [
     {

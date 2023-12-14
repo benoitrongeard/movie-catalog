@@ -16,11 +16,12 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const requestUpdated = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.configService.getTMDBApiToken()}`,
-      },
-    });
-    return next.handle(requestUpdated);
+    /// No more necessary with vercel proxy serverless function
+    // const requestUpdated = request.clone({
+    //   setHeaders: {
+    //     Authorization: `Bearer ${this.configService.getTMDBApiToken()}`,
+    //   },
+    // });
+    return next.handle(request);
   }
 }

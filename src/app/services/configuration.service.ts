@@ -33,6 +33,10 @@ export class ConfigurationService {
     return this.configuration?.tmdbApiUrl ?? '';
   }
 
+  getVercelProxyUrl(): string {
+    return this.configuration?.vercelProxyUrl ?? '';
+  }
+
   getTMDBApiToken(): string {
     return this.configuration?.tmdbApiToken ?? '';
   }

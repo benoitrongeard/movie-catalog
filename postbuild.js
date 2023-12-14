@@ -1,28 +1,36 @@
-const fs = require('fs');
+import * as fs from 'fs';
 
 // Reading config file
 fs.readFile(
   './dist/movie-catalog/assets/config/config.template.json',
   'utf8',
-  function (err, data) {
+  (err, data) => {
     if (err) {
       return console.log(err);
     }
 
     // Replace env value
-    var result = data
-      .replace(/@\[TMDB_API_URL\]/g, process.env.TMDB_API_URL)
-      .replace(/@\[TMDB_API_TOKEN\]/g, process.env.TMDB_API_TOKEN)
-      .replace(/@\[PRODUCTION\]/g, process.env.PRODUCTION);
+    const result = data
+      .replace(/@\[TMDB_API_URL\]/g, process.env['TMDB_API_URL'] ?? '')
+      .replace(/@\[TMDB_API_TOKEN\]/g, process.env['TMDB_API_TOKEN'] ?? '')
+      .replace(/@\[PRODUCTION\]/g, process.env['PRODUCTION'] ?? '')
+      .replace(
+        /@\[VERCEL_PROXY_URL\]/g,
+        process.env['VERCEL_URL']
+          ? `https://${process.env['VERCEL_URL']}/api`
+          : ''
+      );
 
     // Update the file
     fs.writeFile(
       './dist/movie-catalog/assets/config/config.json',
       result,
       'utf8',
-      function (err) {
-        if (err) return console.log(err);
-      }
+      err => (err ? console.log(err) : null)
     );
   }
+);
+
+fs.rm('./dist/movie-catalog/assets/config/config.template.json', err =>
+  err ? console.log(err) : null
 );

@@ -1,6 +1,7 @@
 {
   "name": "movie-catalog",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -25,6 +26,7 @@
     "@vercel/analytics": "^1.1.1",
     "@vercel/edge": "^1.1.1",
     "@vercel/speed-insights": "^1.0.1",
+    "http-proxy-middleware": "^2.0.6",
     "i18n-iso-countries": "^7.7.0",
     "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",

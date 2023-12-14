@@ -26,7 +26,8 @@ export class TmdbMovieProviderService {
     return firstValueFrom(
       this.httpClient
         .get<DataResult>(
-          this.configurationService.getTMDBApiUrl() + '/watch/providers/movie',
+          this.configurationService.getVercelProxyUrl() +
+            '/watch/providers/movie',
           {
             params: {
               language: language,

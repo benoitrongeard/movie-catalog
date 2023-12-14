@@ -21,7 +21,7 @@ export class TmdbConfigurationService {
 
   loadTMDBConfig(): Observable<boolean> {
     return this.httpClient
-      .get(this.configurationService.getTMDBApiUrl() + '/configuration')
+      .get(this.configurationService.getVercelProxyUrl() + '/configuration')
       .pipe(
         map(config => {
           this.configuration =
