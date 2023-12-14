@@ -23,6 +23,7 @@
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "@vercel/analytics": "^1.1.1",
+    "@vercel/edge": "^1.1.1",
     "@vercel/speed-insights": "^1.0.1",
     "i18n-iso-countries": "^7.7.0",
     "ngx-toastr": "^18.0.0",
