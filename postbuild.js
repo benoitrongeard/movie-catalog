@@ -18,7 +18,7 @@ fs.readFile(
     // Replace env value
     const result = data
       .replace(/@\[TMDB_API_URL\]/g, process.env['TMDB_API_URL'] ?? '')
-      .replace(/@\[TMDB_API_TOKEN\]/g, process.env['TMDB_API_TOKEN'] ?? '')
+      // .replace(/@\[TMDB_API_TOKEN\]/g, process.env['TMDB_API_TOKEN'] ?? '')
       .replace(/@\[PRODUCTION\]/g, process.env['PRODUCTION'] ?? '')
       .replace(
         /@\[VERCEL_PROXY_URL\]/g,

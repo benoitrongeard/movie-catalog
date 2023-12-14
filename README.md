@@ -1,6 +1,8 @@
 # MovieCatalog
 
-![Vercel](https://vercelbadge.vercel.app/api/benoits-projects-d03429db/movie-catalog) ![app](https://movie-catalog-flax.vercel.app/)
+![Vercel](https://vercelbadge.vercel.app/api/benoits-projects-d03429db/movie-catalog)
+
+[Consult App](https://movie-catalog-flax.vercel.app/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6
 
