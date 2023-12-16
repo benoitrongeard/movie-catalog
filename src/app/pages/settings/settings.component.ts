@@ -92,7 +92,6 @@ export class SettingsComponent {
    */
   close() {
     this.isOpen = false;
-    this.initForm();
   }
 
   /**

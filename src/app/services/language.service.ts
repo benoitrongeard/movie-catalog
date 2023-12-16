@@ -53,7 +53,6 @@ export class LanguageService {
 
   async updateLanguage(language: string) {
     await firstValueFrom(this.translateService.use(language));
-    await this.initLanguageList();
     this.languageSignal$.set(language);
   }
 }
