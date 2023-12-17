@@ -7,7 +7,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Toast } from 'ngx-toastr';
 
 @Component({
@@ -28,16 +28,8 @@ import { Toast } from 'ngx-toastr';
           '400ms ease-out',
           keyframes([
             style({
-              transform: 'translate3d(100%, 0, 0) skewX(-30deg)',
+              transform: 'translate3d(100%, 0, 0)',
               opacity: 0,
-            }),
-            style({
-              transform: 'skewX(20deg)',
-              opacity: 1,
-            }),
-            style({
-              transform: 'skewX(-5deg)',
-              opacity: 1,
             }),
             style({
               transform: 'none',
@@ -55,7 +47,7 @@ import { Toast } from 'ngx-toastr';
               opacity: 1,
             }),
             style({
-              transform: 'translate3d(100%, 0, 0) skewX(30deg)',
+              transform: 'translate3d(100%, 0, 0)',
               opacity: 0,
             }),
           ])
@@ -64,9 +56,4 @@ import { Toast } from 'ngx-toastr';
     ]),
   ],
 })
-export class ToastrComponent extends Toast implements OnInit {
-  ngOnInit(): void {
-    console.log('Toastr component init');
-    console.log(this.options);
-  }
-}
+export class ToastrComponent extends Toast {}

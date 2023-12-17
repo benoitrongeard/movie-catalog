@@ -15,7 +15,12 @@
   "settings": {
     "language": "Language",
     "country": "Country",
-    "description": "Configure application's language and country."
+    "description": "Configure application's language and country.",
+    "toast": {
+      "title": "Settings",
+      "success": "Settings saved successfully.",
+      "error": "An error occured while saving settings."
+    }
   },
   "filters": {
     "countries": "Countries",

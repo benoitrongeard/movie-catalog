@@ -101,7 +101,7 @@ export class SettingsComponent {
     this.languageService.updateLanguage(this.languageControl.value.language);
     this._countryService.updateCountry(this.countryControl.value);
     this.close();
-    this._toastr.show();
+    this._toastr.success('settings.toast.title', 'settings.toast.success');
   }
 
   /**

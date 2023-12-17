@@ -1,19 +1,10 @@
-<!--
-        Notification panel, dynamically insert this into the live region when it needs to be displayed
-  
-        Entering: "transform ease-out duration-300 transition"
-          From: "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
-          To: "translate-y-0 opacity-100 sm:translate-x-0"
-        Leaving: "transition ease-in duration-100"
-          From: "opacity-100"
-          To: "opacity-0"
-      -->
 <div
-  class="pointer-events-auto w-80 md:w-96 overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+  class="pointer-events-auto w-80 md:w-96 overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 mb-4"
   [style.display]="state.value === 'inactive' ? 'none' : ''">
   <div class="p-4">
     <div class="flex items-start">
       <div class="flex-shrink-0">
+        @if (options.toastClass === 'success') {
         <!-- Success icon -->
         <svg
           class="h-6 w-6 text-green-400"
@@ -27,6 +18,7 @@
             stroke-linejoin="round"
             d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
+        } @else if (options.toastClass === 'error') {
         <!-- Error icon -->
         <svg
           fill="none"
@@ -39,7 +31,7 @@
             stroke-linejoin="round"
             d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
         </svg>
-
+        } @else if (options.toastClass === 'warning') {
         <!-- Warning icon -->
         <svg
           fill="none"
@@ -52,11 +44,14 @@
             stroke-linejoin="round"
             d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
         </svg>
+        }
       </div>
       <div class="ml-3 w-0 flex-1 pt-0.5">
-        <p class="text-sm font-medium text-gray-900">Successfully saved!</p>
+        <p class="text-sm font-medium text-gray-900">
+          {{ title ?? '' | translate }}
+        </p>
         <p class="mt-1 text-sm text-gray-500">
-          Anyone with a link can now view this file.
+          {{ message ?? '' | translate }}
         </p>
       </div>
       <div class="ml-4 flex flex-shrink-0">
@@ -79,7 +74,12 @@
   <!-- Progress bar -->
   <div *ngIf="options.progressBar">
     <div
-      class="left-0 bottom-0 h-1 bg-sky-500 opacity-75"
+      class="left-0 bottom-0 h-1 opacity-90"
+      [ngClass]="{
+        'bg-green-500': options.toastClass === 'success',
+        'bg-orange-500': options.toastClass === 'warning',
+        'bg-red-500': options.toastClass === 'error'
+      }"
       [style.width]="width + '%'"></div>
   </div>
 </div>
