@@ -55,6 +55,18 @@
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
                 <a
+                  routerLink="/home"
+                  routerLinkActive
+                  #rlaHome="routerLinkActive"
+                  class="rounded-md px-3 py-2 text-sm font-medium"
+                  [ngClass]="
+                    rlaHome.isActive
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                  ">
+                  {{ 'menu.home' | translate }}
+                </a>
+                <a
                   routerLink="/films"
                   routerLinkActive
                   #rlaFilms="routerLinkActive"
@@ -141,6 +153,18 @@
       id="mobile-menu">
       <div class="space-y-1 px-2 py-3 sm:px-3">
         <a
+          routerLink="/home"
+          routerLinkActive
+          #rlaHome="routerLinkActive"
+          class="block rounded-md px-3 py-2 text-sm font-medium"
+          [ngClass]="
+            rlaHome.isActive
+              ? 'bg-gray-900 text-white'
+              : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+          ">
+          {{ 'menu.home' | translate }}
+        </a>
+        <a
           routerLink="/films"
           routerLinkActive
           #rlaFilms="routerLinkActive"
@@ -152,7 +176,6 @@
           ">
           {{ 'menu.films' | translate }}
         </a>
-
         <a
           routerLink="/series"
           routerLinkActive
@@ -168,12 +191,12 @@
       </div>
     </div>
   </nav>
-  <header class="py-10">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <header class="py-6">
+    <!-- <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl font-bold tracking-tight text-white">
         {{ headerTitle$() }}
       </h1>
-    </div>
+    </div> -->
   </header>
   <app-settings></app-settings>
 </div>

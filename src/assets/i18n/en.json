@@ -8,6 +8,7 @@
     "save": "Save"
   },
   "menu": {
+    "home": "Home",
     "films": "Films EN",
     "series": "Series EN",
     "settings": "Settings"

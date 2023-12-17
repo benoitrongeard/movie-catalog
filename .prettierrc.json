@@ -9,5 +9,6 @@
   "bracketSameLine": true,
   "printWidth": 80,
   "htmlWhitespaceSensitivity": "ignore",
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
