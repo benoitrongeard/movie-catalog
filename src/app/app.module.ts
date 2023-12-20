@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule, inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -26,6 +26,9 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { SelectInputComponent } from './components/select-input/select-input.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastrComponent } from './components/toastr/toastr.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -83,6 +86,11 @@ export function initApp(
     ToastrModule.forRoot({
       toastComponent: ToastrComponent,
     }),
+    provideFirebaseApp(() =>
+      initializeApp(inject(ConfigurationService).getFirebaseConfig())
+    ),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [
     {

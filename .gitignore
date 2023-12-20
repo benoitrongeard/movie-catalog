@@ -44,3 +44,8 @@ Thumbs.db
 # Env files
 src/assets/config/config.json
 .vercel
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppConfiguration } from 'src/app/interfaces/app-configuration.interface';
 import { Observable, catchError, map } from 'rxjs';
+import { FirebaseConfiguration } from '../interfaces/firebase-configuration.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +40,9 @@ export class ConfigurationService {
 
   getTMDBApiToken(): string {
     return this.configuration?.tmdbApiToken ?? '';
+  }
+
+  getFirebaseConfig(): FirebaseConfiguration {
+    return this.configuration?.firebase ?? {};
   }
 }

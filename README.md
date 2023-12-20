@@ -29,6 +29,14 @@ This function generate a proxy to TMDB api, and adding the TMDB token in headers
 
 ## Development server
 
+Before run server you need to configure the config file.
+
+```bash
+cp src/assets/config/config.template.json src/assets/config/config.json
+```
+
+Replace all value with your own value.
+
 Run `vercel dev` for a dev server. Navigate to `http://localhost:3000/` and `http://localhost:3000/api/{route}`. The application and vercel will automatically reload if you change any of the source files.
 
 ## Code scaffolding

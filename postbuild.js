@@ -20,6 +20,18 @@ fs.readFile(
       .replace(/@\[TMDB_API_URL\]/g, process.env['TMDB_API_URL'] ?? '')
       // .replace(/@\[TMDB_API_TOKEN\]/g, process.env['TMDB_API_TOKEN'] ?? '')
       .replace(/@\[PRODUCTION\]/g, process.env['PRODUCTION'] ?? '')
+      .replace(/@\[FIRE_PROJECT_ID\]/g, process.env['FIRE_PROJECT_ID'] ?? '')
+      .replace(/@\[FIRE_APP_ID\]/g, process.env['FIRE_APP_ID'] ?? '')
+      .replace(
+        /@\[FIRE_STORAGE_BUCKET\]/g,
+        process.env['FIRE_STORAGE_BUCKET'] ?? ''
+      )
+      .replace(/@\[FIRE_API_KEY\]/g, process.env['FIRE_API_KEY'] ?? '')
+      .replace(/@\[FIRE_AUTH_DOMAIN\]/g, process.env['FIRE_AUTH_DOMAIN'] ?? '')
+      .replace(
+        /@\[FIRE_MESSAGING_SENDER_ID\]/g,
+        process.env['FIRE_MESSAGING_SENDER_ID'] ?? ''
+      )
       .replace(
         /@\[VERCEL_PROXY_URL\]/g,
         process.env['VERCEL_URL'] ? `https://${vercelUrl}/api` : ''
