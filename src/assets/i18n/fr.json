@@ -23,6 +23,14 @@
       "error": "Une erreur est survenue lors de la sauvegarde des paramètres."
     }
   },
+  "login": {
+    "title": "Connexion"
+  },
+  "register": {
+    "title": "Inscription",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "subscribe": "Inscrivez-vous !"
+  },
   "filters": {
     "countries": "Pays",
     "providers": "Fournisseurs"

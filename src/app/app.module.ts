@@ -29,6 +29,10 @@ import { ToastrComponent } from './components/toastr/toastr.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AuthLayoutComponent } from './pages/auth-layout/auth-layout.component';
+import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -67,6 +71,10 @@ export function initApp(
     SettingsComponent,
     SelectInputComponent,
     ToastrComponent,
+    AuthLayoutComponent,
+    MainLayoutComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

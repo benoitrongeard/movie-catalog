@@ -23,6 +23,14 @@
       "error": "An error occured while saving settings."
     }
   },
+  "login": {
+    "title": "Sign in"
+  },
+  "register": {
+    "title": "Register",
+    "noAccount": "No account ?",
+    "subscribe": "Subscribe !"
+  },
   "filters": {
     "countries": "Countries",
     "providers": "Providers"
