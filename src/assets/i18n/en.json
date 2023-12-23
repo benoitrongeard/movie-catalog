@@ -24,12 +24,15 @@
     }
   },
   "login": {
-    "title": "Sign in"
+    "title": "Sign in",
+    "signin": "Sign in",
+    "noAccount": "No account ?"
   },
   "register": {
     "title": "Register",
-    "noAccount": "No account ?",
-    "subscribe": "Subscribe !"
+    "subscribe": "Subscribe !",
+    "haveAccount": "Already have an account ?",
+    "login": "Sign in !"
   },
   "filters": {
     "countries": "Countries",
@@ -38,5 +41,11 @@
   "language": {
     "fr": "French",
     "en": "English"
+  },
+  "fields": {
+    "email": "Email",
+    "password": "Password",
+    "passwordConfirm": "Confirm password",
+    "passwordRemember": "Forgot password ?"
   }
 }

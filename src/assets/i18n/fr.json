@@ -24,12 +24,15 @@
     }
   },
   "login": {
-    "title": "Connexion"
+    "title": "Connexion",
+    "signin": "Se connecter",
+    "noAccount": "Vous n'avez pas de compte ?"
   },
   "register": {
     "title": "Inscription",
-    "noAccount": "Vous n'avez pas de compte ?",
-    "subscribe": "Inscrivez-vous !"
+    "subscribe": "Inscrivez-vous !",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "login": "Connectez-vous !"
   },
   "filters": {
     "countries": "Pays",
@@ -38,5 +41,11 @@
   "language": {
     "fr": "Français",
     "en": "Anglais"
+  },
+  "fields": {
+    "email": "Email",
+    "password": "Mot de passe",
+    "passwordConfirm": "Confirmer le mot de passe",
+    "passwordRemember": "Mot de passe oublié ?"
   }
 }

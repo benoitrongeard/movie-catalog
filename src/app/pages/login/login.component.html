@@ -12,7 +12,7 @@
         <label
           for="email"
           class="block text-sm font-medium leading-6 text-white">
-          Email address
+          {{ 'fields.email' | translate }}
         </label>
         <div class="mt-2">
           <input
@@ -30,13 +30,13 @@
           <label
             for="password"
             class="block text-sm font-medium leading-6 text-white">
-            Password
+            {{ 'fields.password' | translate }}
           </label>
           <div class="text-sm">
             <a
               href="#"
               class="font-semibold text-indigo-400 hover:text-indigo-300">
-              Forgot password?
+              {{ 'fields.passwordRemember' | translate }}
             </a>
           </div>
         </div>
@@ -55,13 +55,13 @@
         <button
           type="submit"
           class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-          Sign in
+          {{ 'login.signin' | translate }}
         </button>
       </div>
     </form>
 
     <p class="mt-10 text-center text-sm text-gray-400">
-      {{ 'register.noAccount' | translate }}
+      {{ 'login.noAccount' | translate }}
       <a
         routerLink="/register"
         class="font-semibold leading-6 text-indigo-400 hover:text-indigo-300">
