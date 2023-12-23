@@ -7,12 +7,21 @@ import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
 import { AuthLayoutComponent } from './pages/auth-layout/auth-layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import {
+  AuthGuard,
+  redirectLoggedInTo,
+  redirectUnauthorizedTo,
+} from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    canActivate: [],
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {
         path: '',
@@ -39,7 +48,8 @@ const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
-    canActivate: [],
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome },
     children: [
       {
         path: '',
