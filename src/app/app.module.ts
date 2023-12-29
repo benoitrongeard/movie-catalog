@@ -33,6 +33,7 @@ import { AuthLayoutComponent } from './pages/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -75,6 +76,7 @@ export function initApp(
     MainLayoutComponent,
     LoginComponent,
     RegisterComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
