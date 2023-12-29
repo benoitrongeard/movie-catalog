@@ -10,33 +10,6 @@ import { PasswordValidators } from 'src/app/validators/password';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  validationMessages = {
-    email: [
-      {
-        type: 'required',
-        message: 'We need your email address to verify your identity.',
-      },
-      {
-        type: 'pattern',
-        message:
-          'Seems the email format is not valid. Make sure it includes both @ and a suffix.',
-      },
-    ],
-    password: [
-      {
-        type: 'required',
-        message: 'Please, protect your account with a password.',
-      },
-      {
-        type: 'minlength',
-        message: 'Your password must be at least 5 characters long.',
-      },
-    ],
-    confirmPassword: [
-      { type: 'required', message: 'Password confirmation is required.' },
-    ],
-    matchingPasswords: [{ type: 'areNotEqual', message: 'Password mismatch.' }],
-  };
 
   constructor(private _auth: Auth) {
     this.registerForm = new FormGroup(
@@ -49,7 +22,7 @@ export class RegisterComponent {
           Validators.required,
           Validators.minLength(6),
         ]),
-        confirmPassword: new FormControl<string>('', [
+        passwordConfirm: new FormControl<string>('', [
           Validators.required,
           Validators.minLength(6),
         ]),
@@ -66,11 +39,15 @@ export class RegisterComponent {
     return this.registerForm.get('password');
   }
 
-  get confirmPassword() {
-    return this.registerForm.get('confirmPassword');
+  get passwordConfirm() {
+    return this.registerForm.get('passwordConfirm');
   }
 
   register() {
     console.log('Registering user...');
+  }
+
+  onSubmit() {
+    console.log('submit');
   }
 }

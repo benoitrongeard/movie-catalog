@@ -47,5 +47,11 @@
     "password": "Mot de passe",
     "passwordConfirm": "Confirmer le mot de passe",
     "passwordRemember": "Mot de passe oublié ?"
+  },
+  "errors": {
+    "required": "Ce champ est requis.",
+    "email": "L'email n'est pas valide.",
+    "minLength": "Ce champ doit contenir au moins {{length}} caractères.",
+    "passwordnotequals": "Les mots de passe ne sont pas identiques."
   }
 }

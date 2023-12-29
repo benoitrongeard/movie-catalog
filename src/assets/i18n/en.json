@@ -47,5 +47,11 @@
     "password": "Password",
     "passwordConfirm": "Confirm password",
     "passwordRemember": "Forgot password ?"
+  },
+  "errors": {
+    "required": "This field is required.",
+    "email": "This field must be a valid email address.",
+    "minLength": "This field must be at least {{length}} characters long.",
+    "passwordnotequals": "Passwords are not equals."
   }
 }
