@@ -3,6 +3,7 @@ import { NavigationEnd, Router, Event, RouterEvent } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SettingsComponent } from 'src/app/pages/settings/settings.component';
+import { Auth, signOut } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -14,9 +15,12 @@ export class NavbarComponent {
   headerTitle$: Signal<string | undefined>;
   @ViewChild(SettingsComponent, { static: true }) settings!: SettingsComponent;
 
-  constructor(private router: Router) {
+  constructor(
+    private _router: Router,
+    private _auth: Auth
+  ) {
     this.headerTitle$ = toSignal(
-      this.router.events.pipe(
+      this._router.events.pipe(
         filter(
           (e: Event | RouterEvent): e is RouterEvent =>
             e instanceof NavigationEnd
@@ -36,5 +40,10 @@ export class NavbarComponent {
 
   openSettings() {
     this.settings.open();
+  }
+
+  async signOut() {
+    await signOut(this._auth);
+    this._router.navigate(['/login']);
   }
 }
