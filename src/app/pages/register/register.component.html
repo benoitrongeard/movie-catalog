@@ -25,7 +25,7 @@
               'ring-orange-600 focus:ring-orange-600':
                 email?.invalid && (email?.dirty || email?.touched)
             }"
-            class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
+            class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
         </div>
         <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
           <div class="text-orange-600" *ngIf="email?.errors?.['required']">
@@ -58,7 +58,7 @@
                 (password?.dirty || password?.touched)
             }"
             required
-            class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
+            class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-2 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
         </div>
         <div
           *ngIf="
@@ -100,7 +100,7 @@
                 (passwordConfirm?.dirty || passwordConfirm?.touched)
             }"
             required
-            class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
+            class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6" />
           <div
             *ngIf="
               (registerForm.errors?.['passwordnotequals'] ||

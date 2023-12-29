@@ -43,7 +43,7 @@ export class CustomToastrService {
    */
   error(title: string, message: string) {
     this._options = { ...this._options, toastClass: 'error' };
-    this._ngxToastr.success(message, title, this._options);
+    this._ngxToastr.error(message, title, this._options);
   }
 
   /**
@@ -53,6 +53,6 @@ export class CustomToastrService {
    */
   warning(title: string, message: string) {
     this._options = { ...this._options, toastClass: 'warning' };
-    this._ngxToastr.success(message, title, this._options);
+    this._ngxToastr.warning(message, title, this._options);
   }
 }

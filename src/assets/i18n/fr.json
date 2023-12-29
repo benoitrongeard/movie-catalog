@@ -32,7 +32,8 @@
     "title": "Inscription",
     "subscribe": "Inscrivez-vous !",
     "haveAccount": "Vous avez déjà un compte ?",
-    "login": "Connectez-vous !"
+    "login": "Connectez-vous !",
+    "error": "Une erreur est survenue lors de l'inscription."
   },
   "filters": {
     "countries": "Pays",
@@ -53,5 +54,10 @@
     "email": "L'email n'est pas valide.",
     "minLength": "Ce champ doit contenir au moins {{length}} caractères.",
     "passwordnotequals": "Les mots de passe ne sont pas identiques."
+  },
+  "firebase": {
+    "errors": {
+      "auth/email-already-in-use": "L'adresse email est déjà utilisée."
+    }
   }
 }
