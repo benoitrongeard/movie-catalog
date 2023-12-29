@@ -9,6 +9,9 @@ import { PasswordValidators } from 'src/app/validators/password';
 import { FirebaseError } from '@angular/fire/app';
 import { CustomToastrService } from 'src/app/services/toastr.service';
 import { LoaderClass } from 'src/app/utils/loader';
+import { Router } from '@angular/router';
+import { LanguageService } from 'src/app/services/language.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +23,9 @@ export class RegisterComponent extends LoaderClass {
 
   constructor(
     private _auth: Auth,
-    private _toastr: CustomToastrService
+    private _toastr: CustomToastrService,
+    private _router: Router,
+    private _languageService: LanguageService
   ) {
     super();
     this.registerForm = new FormGroup(
@@ -54,10 +59,9 @@ export class RegisterComponent extends LoaderClass {
     return this.registerForm.get('passwordConfirm');
   }
 
-  register() {
-    console.log('Registering user...');
-  }
-
+  /**
+   * Register an user with email and password
+   */
   async onSubmit() {
     try {
       this.loading = true;
@@ -67,9 +71,14 @@ export class RegisterComponent extends LoaderClass {
         email,
         password
       );
-      console.log('User registered!');
-      console.log(user);
+      const welcomeMessage = await firstValueFrom(
+        this._languageService.getTrad('register.welcome', {
+          name: user.user?.displayName ?? user.user?.email,
+        })
+      );
       this.loading = false;
+      this._toastr.success('register.success', welcomeMessage);
+      this._router.navigate(['/']);
     } catch (httpError) {
       this.loading = false;
       const errorMsg = (httpError as FirebaseError).code;

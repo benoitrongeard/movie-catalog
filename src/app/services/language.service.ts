@@ -51,6 +51,10 @@ export class LanguageService {
     return this.translateService.getBrowserLang();
   }
 
+  getTrad(key: string | Array<string>, interpolateParams?: object) {
+    return this.translateService.get(key, interpolateParams);
+  }
+
   async updateLanguage(language: string) {
     await firstValueFrom(this.translateService.use(language));
     this.languageSignal$.set(language);

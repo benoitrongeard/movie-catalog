@@ -33,7 +33,9 @@
     "subscribe": "Inscrivez-vous !",
     "haveAccount": "Vous avez déjà un compte ?",
     "login": "Connectez-vous !",
-    "error": "Une erreur est survenue lors de l'inscription."
+    "error": "Une erreur est survenue lors de l'inscription.",
+    "success": "Inscription réussie !",
+    "welcome": "Bienvenue {{name}} !"
   },
   "filters": {
     "countries": "Pays",

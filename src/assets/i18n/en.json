@@ -33,7 +33,9 @@
     "subscribe": "Subscribe !",
     "haveAccount": "Already have an account ?",
     "login": "Sign in !",
-    "error": "An error occured while creating your account."
+    "error": "An error occured while creating your account.",
+    "success": "Registration successful !",
+    "welcome": "Welcome {{name}} !"
   },
   "filters": {
     "countries": "Countries",
