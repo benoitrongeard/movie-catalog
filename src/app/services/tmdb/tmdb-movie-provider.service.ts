@@ -15,8 +15,8 @@ type DataResult = {
 })
 export class TmdbMovieProviderService {
   constructor(
-    private httpClient: HttpClient,
-    private configurationService: ConfigurationService
+    private _httpClient: HttpClient,
+    private _configurationService: ConfigurationService
   ) {}
 
   getMovieProviders(
@@ -24,9 +24,9 @@ export class TmdbMovieProviderService {
     region: string
   ): Promise<TmdbMovieProvider[]> {
     return firstValueFrom(
-      this.httpClient
+      this._httpClient
         .get<DataResult>(
-          this.configurationService.getVercelProxyUrl() +
+          this._configurationService.getVercelProxyUrl() +
             '/watch/providers/movie',
           {
             params: {

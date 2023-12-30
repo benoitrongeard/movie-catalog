@@ -29,22 +29,21 @@ export class CountryService {
    * Load locale for given language and update countries
    * @param language Language to load
    */
-  loadCountries(language: string) {
+  async loadCountries(language: string) {
     if (language != null) {
-      this.registerLocale(language).then(() => {
-        const countries = this.createCountries(getNames(language));
-        // Update countries list
-        this._countriesSignal$.set(countries);
+      await this.registerLocale(language);
+      const countries = this.createCountries(getNames(language));
+      // Update countries list
+      this._countriesSignal$.set(countries);
 
-        // Update current country
-        const currentCountry = countries.find(
-          country =>
-            country.alpha2Key ==
-            (this._currentCountry?.alpha2Key ??
-              navigator?.language?.split('-')[1])
-        );
-        this._countrySignal$.set(currentCountry ?? null);
-      });
+      // Update current country
+      const currentCountry = countries.find(
+        country =>
+          country.alpha2Key ==
+          (this._currentCountry?.alpha2Key ??
+            navigator?.language?.split('-')[1])
+      );
+      this._countrySignal$.set(currentCountry ?? null);
     }
   }
 
