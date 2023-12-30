@@ -8,7 +8,7 @@ platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .catch(err => console.error(err))
   .finally(() => {
-    console.log('Activate Vercel Speed Insights & Analytics');
+    console.info('Activate Vercel Speed Insights & Analytics');
     injectSpeedInsights({});
     inject();
   });

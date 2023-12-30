@@ -76,13 +76,13 @@ export class RegisterComponent extends LoaderClass {
           name: user.user?.displayName ?? user.user?.email,
         })
       );
-      this.loading = false;
       this._toastr.success('register.success', welcomeMessage);
       this._router.navigate(['/']);
     } catch (httpError) {
-      this.loading = false;
       const errorMsg = (httpError as FirebaseError).code;
       this._toastr.error('register.error', `firebase.errors.${errorMsg}`);
+    } finally {
+      this.loading = false;
     }
   }
 }

@@ -26,7 +26,8 @@
   "login": {
     "title": "Connexion",
     "signin": "Se connecter",
-    "noAccount": "Vous n'avez pas de compte ?"
+    "noAccount": "Vous n'avez pas de compte ?",
+    "error": "Une erreur est survenue lors de la connexion."
   },
   "register": {
     "title": "Inscription",
@@ -59,7 +60,8 @@
   },
   "firebase": {
     "errors": {
-      "auth/email-already-in-use": "L'adresse email est déjà utilisée."
+      "auth/email-already-in-use": "L'adresse email est déjà utilisée.",
+      "auth/invalid-credential": "L'adresse email ou le mot de passe est incorrect"
     }
   }
 }

@@ -26,7 +26,8 @@
   "login": {
     "title": "Sign in",
     "signin": "Sign in",
-    "noAccount": "No account ?"
+    "noAccount": "No account ?",
+    "error": "An error occured while signing in."
   },
   "register": {
     "title": "Register",
@@ -59,7 +60,8 @@
   },
   "firebase": {
     "errors": {
-      "auth/email-already-in-use": "The email address is already in use"
+      "auth/email-already-in-use": "The email address is already in use",
+      "auth/invalid-credential": "The credentials are invalid"
     }
   }
 }
