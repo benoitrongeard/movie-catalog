@@ -33,6 +33,7 @@ import { AuthLayoutComponent } from './pages/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { register } from 'swiper/element/bundle';
 import { LoaderComponent } from './components/loader/loader.component';
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {
@@ -76,8 +77,21 @@ export function initApp(
     MainLayoutComponent,
     LoginComponent,
     RegisterComponent,
-    LoaderComponent,
   ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      multi: true,
+      deps: [ConfigurationService, TmdbConfigurationService],
+    },
+  ],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -101,20 +115,11 @@ export function initApp(
     ),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    LoaderComponent,
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true,
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initApp,
-      multi: true,
-      deps: [ConfigurationService, TmdbConfigurationService],
-    },
-  ],
-  bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    register();
+  }
+}

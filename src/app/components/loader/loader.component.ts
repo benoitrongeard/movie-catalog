@@ -4,6 +4,8 @@ import { Component, Input } from '@angular/core';
   selector: 'app-loader',
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.css',
+  standalone: true,
+  imports: [],
 })
 export class LoaderComponent {
   @Input() loading = false;
