@@ -1,0 +1,26 @@
+<div
+  class="custom-swiper-bullet-active mt-10 flex h-52 w-full items-center justify-center">
+  <swiper-container class="h-full w-full cursor-pointer" init="false">
+    @defer (when (trends)) {
+      @if (trends) {
+        @for (trend of trends; track trend.id) {
+          <swiper-slide class="flex items-center justify-center">
+            @if (trend.mediaType == TMDMediaType.Movie) {
+              {{ trend.title }}
+            } @else if (trend.mediaType == TMDMediaType.Tv) {
+              {{ trend.name }}
+            }
+          </swiper-slide>
+        }
+      } @else {
+        <div class="m-auto h-auto w-16 sm:w-20">
+          <app-loader [loading]="true" [color]="'stroke-sky-500'"></app-loader>
+        </div>
+      }
+    } @placeholder {
+      <div class="m-auto h-auto w-16 sm:w-20">
+        <app-loader [loading]="true" [color]="'stroke-sky-500'"></app-loader>
+      </div>
+    }
+  </swiper-container>
+</div>

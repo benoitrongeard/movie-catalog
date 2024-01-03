@@ -2,13 +2,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, firstValueFrom, map } from 'rxjs';
 import { TmdbMovieProvider } from 'src/app/interfaces/tmdb-movie-provider.interface';
+import { TMDBPageResult } from 'src/app/interfaces/tmdb-page-result.interface';
 import { ConfigurationService } from 'src/app/services/configuration.service';
 import { ObjectUtils } from 'src/app/utils/object.utils';
 import { StringUtils } from 'src/app/utils/string.utils';
-
-type DataResult = {
-  results: TmdbMovieProvider[];
-};
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +22,7 @@ export class TmdbMovieProviderService {
   ): Promise<TmdbMovieProvider[]> {
     return firstValueFrom(
       this._httpClient
-        .get<DataResult>(
+        .get<TMDBPageResult<TmdbMovieProvider>>(
           this._configurationService.getVercelProxyUrl() +
             '/watch/providers/movie',
           {
@@ -36,7 +33,7 @@ export class TmdbMovieProviderService {
           }
         )
         .pipe(
-          map((data: DataResult) => {
+          map((data: TMDBPageResult<TmdbMovieProvider>) => {
             const providers: TmdbMovieProvider[] =
               ObjectUtils.convertObjectToInterface<TmdbMovieProvider[]>(
                 data.results
