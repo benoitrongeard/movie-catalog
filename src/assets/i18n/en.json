@@ -38,6 +38,9 @@
     "success": "Registration successful !",
     "welcome": "Welcome {{name}} !"
   },
+  "trending": {
+    "title": "Trending"
+  },
   "filters": {
     "countries": "Countries",
     "providers": "Providers"

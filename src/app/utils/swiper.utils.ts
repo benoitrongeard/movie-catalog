@@ -3,13 +3,16 @@ import { SwiperOptions } from 'swiper/types';
 export class SwiperUtils {
   static swiperParams: SwiperOptions = {
     slidesPerView: 2,
-    spaceBetween: 30,
     freeMode: true,
     scrollbar: {
       dragClass: 'custom-scrollbar-drag',
       draggable: true,
     },
     mousewheel: true,
+    speed: 1000,
+    autoplay: {
+      delay: 2000,
+    },
     injectStyles: [
       `
       .custom-bullet-active {
@@ -27,14 +30,20 @@ export class SwiperUtils {
       }
     `,
     ],
-    pagination: {
-      clickable: true,
-      bulletActiveClass: 'custom-bullet-active',
-    },
+    // pagination: {
+    //   clickable: true,
+    //   bulletActiveClass: 'custom-bullet-active',
+    // },
     observeSlideChildren: true,
     breakpoints: {
       640: {
         slidesPerView: 3,
+      },
+      920: {
+        slidesPerView: 4,
+      },
+      1024: {
+        slidesPerView: 5,
       },
     },
   };

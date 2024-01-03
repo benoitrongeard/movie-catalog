@@ -38,6 +38,9 @@
     "success": "Inscription réussie !",
     "welcome": "Bienvenue {{name}} !"
   },
+  "trending": {
+    "title": "Tendances"
+  },
   "filters": {
     "countries": "Pays",
     "providers": "Fournisseurs"

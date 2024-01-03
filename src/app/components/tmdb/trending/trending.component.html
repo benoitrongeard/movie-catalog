@@ -1,23 +1,37 @@
+<div class="mt-10 text-2xl text-sky-600">
+  <p>{{ 'trending.title' | translate }}</p>
+</div>
 <div
-  class="custom-swiper-bullet-active mt-10 flex h-52 w-full items-center justify-center">
+  class="custom-swiper-bullet-active relative mt-5 flex h-72 w-full items-center justify-center rounded bg-gray-800 pt-4">
+  <div
+    class="absolute mb-4 h-full w-[calc(100%+2.5rem)] bg-gray-800 sm:w-[calc(100%+3rem)]"></div>
   <swiper-container class="h-full w-full cursor-pointer" init="false">
-    @defer (when (trends)) {
-      @if (trends) {
-        @for (trend of trends; track trend.id) {
-          <swiper-slide class="flex items-center justify-center">
-            @if (trend.mediaType == TMDMediaType.Movie) {
-              {{ trend.title }}
-            } @else if (trend.mediaType == TMDMediaType.Tv) {
-              {{ trend.name }}
-            }
-          </swiper-slide>
-        }
-      } @else {
-        <div class="m-auto h-auto w-16 sm:w-20">
-          <app-loader [loading]="true" [color]="'stroke-sky-500'"></app-loader>
-        </div>
+    @if (trends) {
+      @for (trend of trends; track trend.id) {
+        <swiper-slide
+          class="relative flex items-center justify-center pb-6 pt-2">
+          <!-- @if (trend.mediaType == TMDMediaType.Movie) {
+            {{ trend.posterPath | TMDBImage: PosterSizes.original }}
+          } @else if (trend.mediaType == TMDMediaType.Tv) {
+            {{ trend.posterPath | TMDBImage: PosterSizes.original }}
+          } -->
+          <div class="relative h-full">
+            <img
+              src="{{ trend.posterPath | TMDBImage: PosterSizes.original }}"
+              class="h-full max-w-full rounded-lg"
+              alt="{{ trend?.title ?? trend?.name }}" />
+            <div class="absolute -right-2 -top-2 rounded">
+              <span
+                [ngClass]="trend.voteAverage | voteColor"
+                class="my-1 inline-flex items-center rounded-full px-1 py-1 text-sm font-semibold text-gray-900 ring-1 ring-inset">
+                {{ trend.voteAverage | average }}
+                <i class="mb-2 text-xs">%</i>
+              </span>
+            </div>
+          </div>
+        </swiper-slide>
       }
-    } @placeholder {
+    } @else {
       <div class="m-auto h-auto w-16 sm:w-20">
         <app-loader [loading]="true" [color]="'stroke-sky-500'"></app-loader>
       </div>
