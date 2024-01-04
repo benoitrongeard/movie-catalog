@@ -39,7 +39,11 @@
     "welcome": "Welcome {{name}} !"
   },
   "trending": {
-    "title": "Trending"
+    "title": {
+      "movie": "Trending movies",
+      "tv": "Trending series",
+      "all": "Trending"
+    }
   },
   "filters": {
     "countries": "Countries",

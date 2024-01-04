@@ -2,6 +2,9 @@ import {
   AfterViewInit,
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
+  ElementRef,
+  Input,
+  ViewChild,
   effect,
   inject,
   untracked,
@@ -46,6 +49,8 @@ export class TrendingComponent implements AfterViewInit {
   languageService = inject(LanguageService);
   error: string | undefined;
   trends: TMDBTrending[] | undefined;
+  @Input() mediaType: 'movie' | 'tv' | 'all' = 'all';
+  @ViewChild('swipper') swipper!: ElementRef;
 
   /* ENUM */
   TMDMediaType = TMDMediaType;
@@ -67,7 +72,7 @@ export class TrendingComponent implements AfterViewInit {
   }
 
   initSwiper() {
-    const swiperEl = document.querySelector('swiper-container');
+    const swiperEl = this.swipper.nativeElement;
     if (swiperEl) {
       Object.assign(swiperEl, SwiperUtils.swiperParams);
       swiperEl.initialize();
@@ -77,7 +82,10 @@ export class TrendingComponent implements AfterViewInit {
   async loadTrends(language: string, country: Country) {
     try {
       const TMDBlanguage = `${language}-${country?.alpha2Key}`;
-      this.trends = await this.trendingService.getWeeklyTrending(TMDBlanguage);
+      this.trends = await this.trendingService.getWeeklyTrending(
+        TMDBlanguage,
+        this.mediaType
+      );
     } catch (error) {
       console.log('error');
       this.error = error as string;

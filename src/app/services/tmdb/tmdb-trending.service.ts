@@ -15,11 +15,12 @@ export class TmdbTrendingService {
     private _configurationService: ConfigurationService
   ) {}
 
-  getWeeklyTrending(language: string) {
+  getWeeklyTrending(language: string, type: 'movie' | 'tv' | 'all') {
     return firstValueFrom(
       this._httpClient
         .get<TMDBPageResult<TMDBTrending>>(
-          this._configurationService.getVercelProxyUrl() + '/trending/all/week',
+          this._configurationService.getVercelProxyUrl() +
+            `/trending/${type}/week`,
           {
             params: {
               language: language,

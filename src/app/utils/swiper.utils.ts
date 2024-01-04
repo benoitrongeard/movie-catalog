@@ -11,7 +11,7 @@ export class SwiperUtils {
     mousewheel: true,
     speed: 1000,
     autoplay: {
-      delay: 2000,
+      delay: 3000,
     },
     injectStyles: [
       `

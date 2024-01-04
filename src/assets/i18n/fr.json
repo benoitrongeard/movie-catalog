@@ -39,7 +39,11 @@
     "welcome": "Bienvenue {{name}} !"
   },
   "trending": {
-    "title": "Tendances"
+    "title": {
+      "movie": "Films tendances",
+      "tv": "Séries tendances",
+      "all": "Tendances"
+    }
   },
   "filters": {
     "countries": "Pays",
