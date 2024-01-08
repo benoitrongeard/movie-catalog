@@ -11,7 +11,7 @@
 <div
   class="custom-swiper-bullet-active relative mt-5 flex h-72 w-full items-center justify-center rounded bg-gray-800 pt-4">
   <div
-    class="absolute mb-4 h-full w-[calc(100%+2.5rem)] bg-gray-800 sm:w-[calc(100%+3rem)]"></div>
+    class="absolute mb-4 h-full w-[calc(100%+1rem)] bg-gray-800 sm:w-[calc(100%+3rem)]"></div>
   <swiper-container class="h-full w-full cursor-pointer" init="false" #swipper>
     @if (trends) {
       @for (trend of trends; track trend.id) {
@@ -25,7 +25,7 @@
           <div class="relative h-full">
             <img
               src="{{ trend.posterPath | TMDBImage: PosterSizes.original }}"
-              class="h-full max-w-full rounded-lg"
+              class="h-full rounded-lg"
               alt="{{ trend?.title ?? trend?.name }}" />
 
             <!-- Average vote -->
