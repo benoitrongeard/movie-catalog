@@ -1,11 +1,4 @@
-import {
-  CUSTOM_ELEMENTS_SCHEMA,
-  Component,
-  Input,
-  effect,
-  inject,
-  untracked,
-} from '@angular/core';
+import { Component, Input, effect, inject, untracked } from '@angular/core';
 import { CountryService } from 'src/app/services/country.service';
 import { LanguageService } from 'src/app/services/language.service';
 import { TmdbTrendingService } from 'src/app/services/tmdb/tmdb-trending.service';
@@ -21,8 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgClass, PercentPipe } from '@angular/common';
 import { VoteColorPipe } from 'src/app/pipes/vote-color.pipe';
 import { AveragePipe } from 'src/app/pipes/average.pipe';
-import { SwiperComponent } from '../../swiper/swiper.component';
-import { TitleSeparatorComponent } from '../../title-separator/title-separator.component';
+import { TitleSeparatorComponent } from 'src/app/components/title-separator/title-separator.component';
+import { SwiperComponent } from 'src/app/components/swiper/swiper.component';
 
 @Component({
   selector: 'app-trending',
@@ -36,13 +29,12 @@ import { TitleSeparatorComponent } from '../../title-separator/title-separator.c
     VoteColorPipe,
     AveragePipe,
     TitleSeparatorComponent,
+    SwiperComponent,
   ],
-  // Used for custom element swiper
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './trending.component.html',
   styleUrl: './trending.component.css',
 })
-export class TrendingComponent extends SwiperComponent {
+export class TrendingComponent extends LoaderComponent {
   trendingService = inject(TmdbTrendingService);
   countryService = inject(CountryService);
   languageService = inject(LanguageService);

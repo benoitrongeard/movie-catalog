@@ -1,0 +1,15 @@
+<swiper-container class="h-full w-full cursor-pointer" init="false" #swipper>
+  @if (items && !loading) {
+    @for (item of items; track $index) {
+      <swiper-slide class="relative flex items-center justify-center pb-6 pt-2">
+        <ng-container
+          [ngTemplateOutlet]="slideTemplate"
+          [ngTemplateOutletContext]="{ item }"></ng-container>
+      </swiper-slide>
+    }
+  } @else {
+    <div class="m-auto h-auto w-16 sm:w-20">
+      <app-loader [loading]="loading" [color]="'stroke-sky-500'"></app-loader>
+    </div>
+  }
+</swiper-container>

@@ -1,16 +1,38 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  AfterViewInit,
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  ElementRef,
+  Input,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { SwiperUtils } from 'src/app/utils/swiper.utils';
-import { LoaderComponent } from '../loader/loader.component';
+import { LoaderComponent } from 'src/app/components/loader/loader.component';
 
 @Component({
   selector: 'app-swiper',
   standalone: true,
-  imports: [],
+  imports: [NgTemplateOutlet, LoaderComponent],
+  // Used for custom element swiper
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './swiper.component.html',
   styleUrl: './swiper.component.css',
+  styles: [
+    `
+      :host {
+        @apply h-full;
+        @apply w-full;
+      }
+    `,
+  ],
 })
-export class SwiperComponent extends LoaderComponent implements AfterViewInit {
+export class SwiperComponent<T> implements AfterViewInit {
   @ViewChild('swipper') swipper!: ElementRef;
+  @Input() items: T[] | undefined;
+  @Input() loading = false;
+  @Input() slideTemplate!: TemplateRef<unknown>;
 
   ngAfterViewInit(): void {
     this.initSwiper();

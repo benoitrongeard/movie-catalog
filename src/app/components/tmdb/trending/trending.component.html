@@ -1,38 +1,33 @@
 <app-title-separator
   [title]="'trending.title.' + mediaType"></app-title-separator>
 <div
-  class="custom-swiper-bullet-active relative mt-5 flex h-72 w-full items-center justify-center rounded bg-gray-800 pt-4">
+  class="relative mt-5 flex h-72 w-full items-center justify-center rounded bg-gray-800 pt-4">
+  <!-- Large background -->
   <div
     class="absolute mb-4 h-full w-[calc(100%+1rem)] bg-gray-800 sm:w-[calc(100%+3rem)]"></div>
-  <swiper-container class="h-full w-full cursor-pointer" init="false" #swipper>
-    @if (trends && !loading) {
-      @for (trend of trends; track trend.id) {
-        <swiper-slide
-          class="relative flex items-center justify-center pb-6 pt-2">
-          <div class="relative h-full">
-            <img
-              src="{{ trend.posterPath | TMDBImage: PosterSizes.original }}"
-              class="h-full rounded-lg"
-              alt="{{ trend?.title ?? trend?.name }}" />
+  <app-swiper
+    [items]="trends"
+    [loading]="loading"
+    [slideTemplate]="slideTemplate"></app-swiper>
 
-            @if (trend.voteAverage) {
-              <div
-                class="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-tr-lg border-r-0 border-t-0 bg-gray-900/70">
-                <span
-                  [ngClass]="trend.voteAverage | voteColor"
-                  class="inline-flex items-center text-sm font-semibold text-gray-900">
-                  {{ trend.voteAverage | average }}
-                  <i class="mb-2 text-sm">%</i>
-                </span>
-              </div>
-            }
-          </div>
-        </swiper-slide>
+  <ng-template #slideTemplate let-item="item">
+    <div class="relative h-full">
+      <img
+        src="{{ item.posterPath | TMDBImage: PosterSizes.original }}"
+        class="h-full rounded-lg"
+        alt="{{ item?.title ?? item?.name }}" />
+
+      @if (item.voteAverage) {
+        <div
+          class="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-tr-lg border-r-0 border-t-0 bg-gray-900/70">
+          <span
+            [ngClass]="item.voteAverage | voteColor"
+            class="inline-flex items-center text-sm font-semibold text-gray-900">
+            {{ item.voteAverage | average }}
+            <i class="mb-2 text-sm">%</i>
+          </span>
+        </div>
       }
-    } @else {
-      <div class="m-auto h-auto w-16 sm:w-20">
-        <app-loader [loading]="loading" [color]="'stroke-sky-500'"></app-loader>
-      </div>
-    }
-  </swiper-container>
+    </div>
+  </ng-template>
 </div>
