@@ -1,10 +1,7 @@
 import {
-  AfterViewInit,
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
-  ElementRef,
   Input,
-  ViewChild,
   effect,
   inject,
   untracked,
@@ -17,7 +14,6 @@ import {
   TMDBTrending,
   TMDMediaType,
 } from 'src/app/interfaces/tmdb-trending.interface';
-import { SwiperUtils } from 'src/app/utils/swiper.utils';
 import { Country } from 'src/app/interfaces/country-interface';
 import { TMDBImagePipe } from 'src/app/pipes/tmdb-image.pipe';
 import { PosterSizes } from 'src/app/interfaces/tmdb-configuration.interface';
@@ -25,6 +21,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgClass, PercentPipe } from '@angular/common';
 import { VoteColorPipe } from 'src/app/pipes/vote-color.pipe';
 import { AveragePipe } from 'src/app/pipes/average.pipe';
+import { SwiperComponent } from '../../swiper/swiper.component';
+import { TitleSeparatorComponent } from '../../title-separator/title-separator.component';
 
 @Component({
   selector: 'app-trending',
@@ -37,58 +35,47 @@ import { AveragePipe } from 'src/app/pipes/average.pipe';
     NgClass,
     VoteColorPipe,
     AveragePipe,
+    TitleSeparatorComponent,
   ],
   // Used for custom element swiper
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './trending.component.html',
   styleUrl: './trending.component.css',
 })
-export class TrendingComponent implements AfterViewInit {
+export class TrendingComponent extends SwiperComponent {
   trendingService = inject(TmdbTrendingService);
   countryService = inject(CountryService);
   languageService = inject(LanguageService);
-  error: string | undefined;
   trends: TMDBTrending[] | undefined;
   @Input() mediaType: 'movie' | 'tv' | 'all' = 'all';
-  @ViewChild('swipper') swipper!: ElementRef;
 
   /* ENUM */
   TMDMediaType = TMDMediaType;
   PosterSizes = PosterSizes;
 
   constructor() {
+    super();
     effect(() => {
       const country = this.countryService.countrySignal();
       const language = untracked(() => this.languageService.languageSignal());
       if (country && language) {
-        this.trends = undefined;
         this.loadTrends(language, country);
       }
     });
   }
 
-  ngAfterViewInit(): void {
-    this.initSwiper();
-  }
-
-  initSwiper() {
-    const swiperEl = this.swipper.nativeElement;
-    if (swiperEl) {
-      Object.assign(swiperEl, SwiperUtils.swiperParams);
-      swiperEl.initialize();
-    }
-  }
-
   async loadTrends(language: string, country: Country) {
     try {
+      this.loading = true;
       const TMDBlanguage = `${language}-${country?.alpha2Key}`;
       this.trends = await this.trendingService.getWeeklyTrending(
         TMDBlanguage,
         this.mediaType
       );
     } catch (error) {
-      console.log('error');
-      this.error = error as string;
+      console.error(error);
+    } finally {
+      this.loading = false;
     }
   }
 }

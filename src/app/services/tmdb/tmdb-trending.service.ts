@@ -36,7 +36,7 @@ export class TmdbTrendingService {
             return trendings;
           }),
           catchError((error: HttpErrorResponse) => {
-            console.error('Error loading trending movies', error);
+            console.error(error);
             throw new Error('Error loading trending movies');
           })
         )
